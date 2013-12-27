@@ -43,11 +43,11 @@ public class MyAdapter extends ArrayAdapter<Item> {
 		    Button button = (Button)rowView.findViewById(R.id.showHideAns);
 		    // 4. Set the text for textView 
 		    labelView.setText(itemsArrayList.get(position).getTitle());
-		    labelView.setTextSize(14);
-		    labelView.setTextColor(Color.BLUE);
+		    labelView.setTextSize(18);
+		    labelView.setTextColor(Color.rgb(99, 6, 112));
 		    
 		    valueView.setText(itemsArrayList.get(position).getDescription());
-		    valueView.setTextSize(12);
+		    valueView.setTextSize(16);
 		    valueView.setTextColor(Color.BLACK);
 		    
 		    CurrentRowHolder holder = new CurrentRowHolder();

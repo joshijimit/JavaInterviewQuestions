@@ -16,6 +16,7 @@
         android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
+         android:textSize="20sp"
         android:text="Enter" />
 
     <TextView
@@ -26,6 +27,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="179dp"
         android:text="Welcome To Java World"
+        android:textSize="20sp"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>
