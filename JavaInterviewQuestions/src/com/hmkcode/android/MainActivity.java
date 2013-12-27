@@ -1,11 +1,5 @@
 package com.hmkcode.android;
 
-import java.io.IOException;
-import java.util.List;
-
-import com.hmkcode.android.model.Categories;
-import com.hmkcode.android.sqlite.MySQLiteHelper;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

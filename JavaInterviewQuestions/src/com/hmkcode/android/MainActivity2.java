@@ -43,9 +43,7 @@ public class MainActivity2 extends ListActivity {
 
 		setContentView(R.layout.activity_main2);
 
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-
-		readData();
+		getActionBar().setDisplayHomeAsUpEnabled(true);		
 
 		et = (EditText) findViewById(R.id.editText1);
 		lv = (ListView) findViewById(android.R.id.list);
@@ -105,9 +103,8 @@ public class MainActivity2 extends ListActivity {
 
 			for (Categories book : list) {
 				CATEGORIES.add(book.getCategoryName());
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			}			
+		} catch (IOException e) {			
 			e.printStackTrace();
 		} finally {
 			db.close();
@@ -178,11 +175,4 @@ public class MainActivity2 extends ListActivity {
 			return row;
 		}
 	}
-
-	private void readData() {
-		MySQLiteHelper db = new MySQLiteHelper(this);
-		db.openDataBase();
-
-	}
-
 }

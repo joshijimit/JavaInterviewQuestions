@@ -60,13 +60,14 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 				// Force call to upgrade the database
 				// SQLiteDatabase parameter is not used so passing in referenced
 				// to closed db not an issue
-				onUpgrade(db_Read2, versionOfActiveDatabase, DATABASE_VERSION);
-				this.getReadableDatabase();
-
+				onUpgrade(db_Read2, versionOfActiveDatabase, DATABASE_VERSION);				
+				
 				try {
-
+					SQLiteDatabase db =this.getReadableDatabase();
+					if (db.isOpen()){
+						db.close();
+					}
 					copyDataBase();
-
 				} catch (IOException e) {
 
 					throw new Error("Error copying database");
@@ -83,11 +84,13 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 			// the default system path
 			// of your application so we are gonna be able to overwrite that
 			// database with our database.
-			this.close();
-			this.getReadableDatabase();
-
+			
 			try {
-
+				this.close();
+				SQLiteDatabase db =this.getReadableDatabase();
+				if (db.isOpen()){
+					db.close();
+				}
 				copyDataBase();
 
 			} catch (IOException e) {
@@ -126,7 +129,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
 		}
 
-		return checkDB != null ? true : false;
+		return checkDB != null;
 	}
 
 	/**
