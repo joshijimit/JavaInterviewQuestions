@@ -53,8 +53,6 @@ public class MainActivity extends Activity implements OnClickListener {
         
 	}
 	
-	
-	
 	@Override
 	public void onClick(View v) {
 		Log.i("clicks","You Clicked Start");
@@ -69,6 +67,13 @@ public class MainActivity extends Activity implements OnClickListener {
 		b.putString("favourite", "true");
 		i.putExtras(b);
         startActivity(i);
+	}
+	
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
+		finish();
 	}
 	
 }
