@@ -26,8 +26,7 @@ import com.hmkcode.android.sqlite.MySQLiteHelper;
 
 public class MainActivity2 extends ListActivity {
 
-	private EditText et;
-	private ListView lv;
+	private EditText et;	
 	private ArrayList<String> CATEGORIES = new ArrayList<String>();
 
 	// Search EditText
@@ -45,8 +44,7 @@ public class MainActivity2 extends ListActivity {
 
 		getActionBar().setDisplayHomeAsUpEnabled(true);		
 
-		et = (EditText) findViewById(R.id.editText1);
-		lv = (ListView) findViewById(android.R.id.list);
+		et = (EditText) findViewById(R.id.editText1);		
 
 		loadCategoriesFromDB();
 

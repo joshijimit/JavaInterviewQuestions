@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.hmkcode.android.model.CurrentRowHolder;
@@ -19,35 +21,53 @@ import com.hmkcode.android.model.Questions;
 import com.hmkcode.android.sqlite.MySQLiteHelper;
 
 public class MainActivity3 extends ListActivity {
-    
+
+	private boolean isFromFavourite = false;
+
 	@SuppressLint("NewApi")
 	@Override
 	public void onCreate(Bundle icicle) {
-		super.onCreate(icicle);		
+		super.onCreate(icicle);
 		
-		getActionBar().setDisplayHomeAsUpEnabled(true);	
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
-		// if extending Activity
-		//setContentView(R.layout.activity_main);
-		String cat = getIntent().getStringExtra("selectedCategory");
-		// 1. pass context and data to the custom adapter
-		MyAdapter adapter = new MyAdapter(this, loadQuestionsFromDB(cat));
-		
-		// if extending Activity 2. Get ListView from activity_main.xml
-		//ListView listView = (ListView) findViewById(R.id.listview);
-		
-		// 3. setListAdapter
-		//listView.setAdapter(adapter); if extending Activity
-		setListAdapter(adapter);
-	}
-	
-	public boolean onOptionsItemSelected(MenuItem item){
-	    Intent myIntent = new Intent(getApplicationContext(), MainActivity2.class);
-	    startActivityForResult(myIntent, 0);
-	    return true;
+		String isFavourite = getIntent().getStringExtra("favourite");
+		if (isFavourite != null) {
+			MyAdapter adapter = new MyAdapter(this, loadFavourites());
+			isFromFavourite = true;
+			setListAdapter(adapter);
+		} else {
+			// if extending Activity
+			// setContentView(R.layout.activity_main);
+			String cat = getIntent().getStringExtra("selectedCategory");
+			// 1. pass context and data to the custom adapter
+			MyAdapter adapter = new MyAdapter(this, loadQuestionsFromDB(cat));
 
-	}	
-	
+			// if extending Activity 2. Get ListView from activity_main.xml
+			// ListView listView = (ListView) findViewById(R.id.listview);
+
+			// 3. setListAdapter
+			// listView.setAdapter(adapter); if extending Activity
+			setListAdapter(adapter);
+		}
+
+	}
+
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (isFromFavourite) {
+			Intent myIntent = new Intent(getApplicationContext(),
+					MainActivity.class);
+			startActivityForResult(myIntent, 0);
+		} else {
+			Intent myIntent = new Intent(getApplicationContext(),
+					MainActivity2.class);
+			startActivityForResult(myIntent, 0);
+		}
+
+		return true;
+
+	}
+
 	private ArrayList<Item> loadQuestionsFromDB(String categoryName) {
 
 		ArrayList<Item> items = new ArrayList<Item>();
@@ -58,9 +78,10 @@ public class MainActivity3 extends ListActivity {
 			List<Questions> list = db.getQustionsByCategory(categoryName);
 
 			for (Questions question : list) {
-				items.add(new Item(question.getQuestion(),question.getAnswer()));
+				items.add(new Item(question.get_ID(), question.getQuestion(),
+						question.getAnswer(), question.getIsFavourite()));
 			}
-			
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -70,20 +91,74 @@ public class MainActivity3 extends ListActivity {
 		return items;
 
 	}
-	
-	public void showHideAnsOnClickHandler(View view) {		
-		
+
+	private ArrayList<Item> loadFavourites() {
+
+		ArrayList<Item> items = new ArrayList<Item>();
+		MySQLiteHelper db = new MySQLiteHelper(this);
+		try {
+			db.createDataBase();
+			db.openDataBase();
+			List<Questions> list = db.getFavouriteQustions();
+
+			for (Questions question : list) {
+				items.add(new Item(question.get_ID(), question.getQuestion(),
+						question.getAnswer(), question.getIsFavourite()));
+			}
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.close();
+		}
+		return items;
+
+	}
+
+	public void showHideAnsOnClickHandler(View view) {
+
 		CurrentRowHolder holder = (CurrentRowHolder) view.getTag();
 		Button button = holder.getButton();
 		TextView textView = holder.getValue();
-		if(button.getText().equals("Show Answer")){			
+		if (button.getText().equals("Show Answer")) {
 			textView.setVisibility(View.VISIBLE);
-			button.setText("Hide Answer");	
-		}else{
+			button.setText("Hide Answer");
+		} else {
 			textView.setVisibility(View.GONE);
 			button.setText("Show Answer");
 		}
-		
+
 	}
 
-} 
+	public void onToggleStar(View view) {
+
+		MySQLiteHelper db = new MySQLiteHelper(this);
+		try {
+			db.createDataBase();
+			db.openDataBase();
+
+			CurrentRowHolder holder = (CurrentRowHolder) view.getTag();
+			ImageButton buttonFav = holder.getButtonFav();
+			if (buttonFav.isSelected()) {
+				buttonFav.setSelected(false);
+				db.updateFavourite(holder.getQuestionID(), 0);
+				// Toast.makeText(this, "Favourite removed successfully",
+				// Toast.LENGTH_SHORT).show();
+			} else {
+				buttonFav.setSelected(true);
+				db.updateFavourite(holder.getQuestionID(), 1);
+				// Toast.makeText(this, "Favourite added successfully",
+				// Toast.LENGTH_SHORT).show();
+			}
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.close();
+		}
+
+	}
+
+}

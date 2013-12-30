@@ -2,13 +2,18 @@ package com.hmkcode.android;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hmkcode.android.model.CurrentRowHolder;
@@ -16,48 +21,83 @@ import com.hmkcode.android.model.Item;
 
 public class MyAdapter extends ArrayAdapter<Item> {
 
-		private final Context context;
-		private final ArrayList<Item> itemsArrayList;
+	
+	private final Context context;
+	private final ArrayList<Item> itemsArrayList;
 
-		public MyAdapter(Context context, ArrayList<Item> itemsArrayList) {
-			
-			super(context, R.layout.row, itemsArrayList);
-			
-			this.context = context;
-			this.itemsArrayList = itemsArrayList;
-		}
+	public MyAdapter(Context context, ArrayList<Item> itemsArrayList) {
+
+		super(context, R.layout.row, itemsArrayList);
+
+		this.context = context;
+		this.itemsArrayList = itemsArrayList;
+	}
+
+	@Override
+    public int getCount() 
+    {
+        if(itemsArrayList.size()==0)
+            return 1;
+        else
+            return itemsArrayList.size();
+    }
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+
+		// 1. Create inflater
+		LayoutInflater inflater = (LayoutInflater) context
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-		    
-			// 1. Create inflater 
-			LayoutInflater inflater = (LayoutInflater) context
-		        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		    
+		if (itemsArrayList.size() == 0) {
+			TextView message = new TextView(context);
+			message.setText("No Favourite found.");
+			message.setTextSize(14);
+			message.setLayoutParams(new LinearLayout.LayoutParams(
+					(int) LinearLayout.LayoutParams.WRAP_CONTENT,
+					(int) LinearLayout.LayoutParams.WRAP_CONTENT));
+			View emptyView = inflater.inflate(
+					R.layout.empty_list_item, parent,false);
+			((LinearLayout) emptyView).setGravity(Gravity.CENTER);
+			((LinearLayout) emptyView).addView(message);
+			return emptyView;
+		} else {
+			
 			// 2. Get rowView from inflater
 			View rowView = inflater.inflate(R.layout.row, parent, false);
-		    
+
 			// 3. Get the two text view from the rowView
 			TextView labelView = (TextView) rowView.findViewById(R.id.label);
-		    TextView valueView = (TextView) rowView.findViewById(R.id.value);
-		    Button button = (Button)rowView.findViewById(R.id.showHideAns);
-		    // 4. Set the text for textView 
-		    labelView.setText(itemsArrayList.get(position).getTitle());
-		    labelView.setTextSize(18);
-		    labelView.setTextColor(Color.rgb(99, 6, 112));
-		    
-		    valueView.setText(itemsArrayList.get(position).getDescription());
-		    valueView.setTextSize(16);
-		    valueView.setTextColor(Color.BLACK);
-		    
-		    CurrentRowHolder holder = new CurrentRowHolder();
-		    holder.setButton(button);
-		    holder.setValue(valueView);
-		    
-		    button.setTag(holder);
-		    
-		    // 5. retrn rowView
-		    return rowView;
+			TextView valueView = (TextView) rowView.findViewById(R.id.value);
+			Button button = (Button) rowView.findViewById(R.id.showHideAns);
+			ImageButton buttonFav = (ImageButton) rowView
+					.findViewById(R.id.favorite_button);
+
+			buttonFav.setImageDrawable(getContext().getResources().getDrawable(
+					R.drawable.btn_star));
+			if (itemsArrayList.get(position).getIsFavourite() == 1) {
+				buttonFav.setSelected(true);
+			}
+
+			// 4. Set the text for textView
+			labelView.setText(itemsArrayList.get(position).getTitle());
+			labelView.setTextSize(18);
+			labelView.setTextColor(Color.rgb(99, 6, 112));
+
+			valueView.setText(itemsArrayList.get(position).getDescription());
+			valueView.setTextSize(16);
+			valueView.setTextColor(Color.BLACK);
+
+			CurrentRowHolder holder = new CurrentRowHolder();
+			holder.setQuestionID(itemsArrayList.get(position).getID());
+			holder.setButton(button);
+			holder.setButtonFav(buttonFav);
+			holder.setValue(valueView);
+
+			button.setTag(holder);
+			buttonFav.setTag(holder);
+			// 5. retrn rowView
+			return rowView;
 		}
-		
+	}
+
 }

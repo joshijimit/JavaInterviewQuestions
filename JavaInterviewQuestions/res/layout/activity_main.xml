@@ -13,19 +13,30 @@
         style="@style/CustomStyleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignRight="@+id/textView1"
         android:layout_below="@+id/textView1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-         android:textSize="20sp"
-        android:text="Enter" />
+        android:text="Search Categories"
+        android:textSize="20sp" />
+    
+     <Button
+         android:id="@+id/showFavourite"
+         style="@style/CustomStyleButton"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignLeft="@+id/button1"
+         android:layout_alignRight="@+id/button1"
+         android:layout_below="@+id/button1"
+         android:onClick="showFavourite"
+         android:text="My Favourites"
+         android:textSize="20sp" />
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="179dp"
+        android:layout_centerHorizontal="true"        
         android:text="Welcome To Java World"
         android:textSize="20sp"
         android:textAppearance="?android:attr/textAppearanceLarge" />

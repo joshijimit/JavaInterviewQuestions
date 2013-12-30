@@ -238,7 +238,9 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
 	// Categories table name
 	private static final String TABLE_Categories = "Categories";
-
+	
+	private static final String TABLE_Questions = "Questions";
+	private static final String KEY_Question_ID = "_ID";
 	// Categories Table Columns names
 	private static final String KEY_ID = "_ID";
 	private static final String KEY_TITLE = "CategoryName";
@@ -333,7 +335,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		List<Questions> questionsList = new LinkedList<Questions>();
 
 		// 1. build the query
-		String query = "select q._ID,questions,answer from questions q inner join Answers a on q._id = a.questionid where a.iscorrect = 1 and categoryid = "
+		String query = "select q._ID,questions,answer,q.isFavourite from questions q inner join Answers a on q._id = a.questionid where a.iscorrect = 1 and categoryid = "
 				+ "(select _ID from categories where categoryname = '"
 				+ categoryName + "')";
 
@@ -349,6 +351,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 				questions.set_ID(cursor.getInt(0));
 				questions.setQuestion(cursor.getString(1));
 				questions.setAnswer(cursor.getString(2));
+				questions.setIsFavourite(cursor.getInt(3));
 
 				// Add Category to Categories
 				questionsList.add(questions);
@@ -385,7 +388,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		return i;
 
 	}
-
+	
 	// Deleting single Category
 	public void deleteCategory(Categories category) {
 
@@ -402,4 +405,60 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		Log.d("deleteCategory", category.toString());
 
 	}
+	
+	// Updating single Category
+	public int updateFavourite(Integer questionId, int value) {
+
+			// 1. get reference to writable DB
+			SQLiteDatabase db = this.getWritableDatabase();
+
+			// 2. create ContentValues to add key "column"/value
+			ContentValues values = new ContentValues();
+			values.put("isFavourite", value); // get title			
+
+			// 3. updating row
+			int i = db.update(TABLE_Questions, // table
+					values, // column/value
+					KEY_Question_ID + " = ?", // selections
+					new String[] { String.valueOf(questionId) }); // selection
+																			// args
+
+			// 4. close
+			db.close();
+
+			return i;
+
+	}
+	
+	public List<Questions> getFavouriteQustions(){
+		List<Questions> questionsList = new LinkedList<Questions>();
+
+		// 1. build the query
+		String query = "select q._ID,questions,answer,q.isFavourite from questions q inner join Answers a on q._id = a.questionid where a.iscorrect = 1 and isFavourite = 1";
+		
+		// 2. get reference to writable DB
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.rawQuery(query, null);
+
+		// 3. go over each row, build Category and add it to list
+		Questions questions = null;
+		if (cursor.moveToFirst()) {
+			do {
+				questions = new Questions();
+				questions.set_ID(cursor.getInt(0));
+				questions.setQuestion(cursor.getString(1));
+				questions.setAnswer(cursor.getString(2));
+				questions.setIsFavourite(cursor.getInt(3));
+				
+				// Add Category to Categories
+				questionsList.add(questions);
+			} while (cursor.moveToNext());
+		}
+
+		Log.d("getAllCategories()", questionsList.toString());
+
+		// return Categories
+		return questionsList;
+	}
+
 }
