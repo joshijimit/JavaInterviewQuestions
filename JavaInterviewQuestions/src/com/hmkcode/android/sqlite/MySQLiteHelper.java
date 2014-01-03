@@ -363,6 +363,39 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		// return Categories
 		return questionsList;
 	}
+	
+	// Get All Categories
+		public List<Questions> getAllQustions() {
+			List<Questions> questionsList = new LinkedList<Questions>();
+
+			// 1. build the query
+			String query = "select q._ID,questions,answer,q.isFavourite from questions q inner join Answers a on q._id = a.questionid where a.iscorrect = 1";
+					
+
+			// 2. get reference to writable DB
+			SQLiteDatabase db = this.getWritableDatabase();
+			Cursor cursor = db.rawQuery(query, null);
+
+			// 3. go over each row, build Category and add it to list
+			Questions questions = null;
+			if (cursor.moveToFirst()) {
+				do {
+					questions = new Questions();
+					questions.set_ID(cursor.getInt(0));
+					questions.setQuestion(cursor.getString(1));
+					questions.setAnswer(cursor.getString(2));
+					questions.setIsFavourite(cursor.getInt(3));
+
+					// Add Category to Categories
+					questionsList.add(questions);
+				} while (cursor.moveToNext());
+			}
+
+			Log.d("getAllCategories()", questionsList.toString());
+
+			// return Categories
+			return questionsList;
+		}
 
 	// Updating single Category
 	public int updateCategory(Categories category) {

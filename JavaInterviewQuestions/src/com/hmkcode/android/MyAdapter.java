@@ -2,7 +2,6 @@ package com.hmkcode.android;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.Gravity;
@@ -12,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -24,13 +22,18 @@ public class MyAdapter extends ArrayAdapter<Item> {
 	
 	private final Context context;
 	private final ArrayList<Item> itemsArrayList;
-
-	public MyAdapter(Context context, ArrayList<Item> itemsArrayList) {
+	private final boolean showNoRecordFound;
+	private final int queFontSize;
+	private final int ansFontSize;
+	
+	public MyAdapter(Context context, ArrayList<Item> itemsArrayList,boolean showNoRecordFound, int queFontSize,int ansFontSize) {
 
 		super(context, R.layout.row, itemsArrayList);
-
+		this.showNoRecordFound = showNoRecordFound;
 		this.context = context;
 		this.itemsArrayList = itemsArrayList;
+		this.queFontSize=queFontSize;
+		this.ansFontSize =ansFontSize;
 	}
 
 	@Override
@@ -48,19 +51,20 @@ public class MyAdapter extends ArrayAdapter<Item> {
 		LayoutInflater inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		
-		if (itemsArrayList.size() == 0) {
+		if (itemsArrayList.size() == 0 && showNoRecordFound) {
 			TextView message = new TextView(context);
 			message.setText("No Favourite found.");
-			message.setTextSize(14);
-			message.setLayoutParams(new LinearLayout.LayoutParams(
-					(int) LinearLayout.LayoutParams.WRAP_CONTENT,
-					(int) LinearLayout.LayoutParams.WRAP_CONTENT));
+			message.setTextSize(16);
+			message.setTextColor(Color.RED);
+			message.setLayoutParams(new RelativeLayout.LayoutParams(
+					(int) RelativeLayout.LayoutParams.WRAP_CONTENT,
+					(int) RelativeLayout.LayoutParams.WRAP_CONTENT));
 			View emptyView = inflater.inflate(
 					R.layout.empty_list_item, parent,false);
-			((LinearLayout) emptyView).setGravity(Gravity.CENTER);
-			((LinearLayout) emptyView).addView(message);
+			((RelativeLayout) emptyView).setGravity(Gravity.CENTER);
+			((RelativeLayout) emptyView).addView(message);
 			return emptyView;
-		} else {
+		} else if(itemsArrayList.size() != 0) {
 			
 			// 2. Get rowView from inflater
 			View rowView = inflater.inflate(R.layout.row, parent, false);
@@ -80,11 +84,11 @@ public class MyAdapter extends ArrayAdapter<Item> {
 
 			// 4. Set the text for textView
 			labelView.setText(itemsArrayList.get(position).getTitle());
-			labelView.setTextSize(18);
+			labelView.setTextSize(queFontSize);
 			labelView.setTextColor(Color.rgb(99, 6, 112));
 
 			valueView.setText(itemsArrayList.get(position).getDescription());
-			valueView.setTextSize(16);
+			valueView.setTextSize(ansFontSize);
 			valueView.setTextColor(Color.BLACK);
 
 			CurrentRowHolder holder = new CurrentRowHolder();
@@ -97,6 +101,10 @@ public class MyAdapter extends ArrayAdapter<Item> {
 			buttonFav.setTag(holder);
 			// 5. retrn rowView
 			return rowView;
+		}else{
+			View emptyView = inflater.inflate(
+					R.layout.empty_list_item, parent,false);
+			return emptyView; 
 		}
 	}
 

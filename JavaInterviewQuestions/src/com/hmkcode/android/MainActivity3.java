@@ -8,12 +8,14 @@ import android.annotation.SuppressLint;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hmkcode.android.model.CurrentRowHolder;
 import com.hmkcode.android.model.Item;
@@ -23,25 +25,32 @@ import com.hmkcode.android.sqlite.MySQLiteHelper;
 public class MainActivity3 extends ListActivity {
 
 	private boolean isFromFavourite = false;
-
+	private int queFontSize = 20;
+	private int ansFontSize = 18;
+	ArrayList<Item> items = new ArrayList<Item>();
+	
 	@SuppressLint("NewApi")
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
-		
+
 		getActionBar().setDisplayHomeAsUpEnabled(true);
-		
+
 		String isFavourite = getIntent().getStringExtra("favourite");
 		if (isFavourite != null) {
-			MyAdapter adapter = new MyAdapter(this, loadFavourites());
+			items = loadFavourites();
+			MyAdapter adapter = new MyAdapter(this, items, true,queFontSize,ansFontSize);
 			isFromFavourite = true;
 			setListAdapter(adapter);
 		} else {
 			// if extending Activity
 			// setContentView(R.layout.activity_main);
 			String cat = getIntent().getStringExtra("selectedCategory");
+			
+			items = loadQuestionsFromDB(cat);
 			// 1. pass context and data to the custom adapter
-			MyAdapter adapter = new MyAdapter(this, loadQuestionsFromDB(cat));
+			MyAdapter adapter = new MyAdapter(this, items,
+					true,queFontSize,ansFontSize);
 
 			// if extending Activity 2. Get ListView from activity_main.xml
 			// ListView listView = (ListView) findViewById(R.id.listview);
@@ -54,6 +63,26 @@ public class MainActivity3 extends ListActivity {
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item) {
+
+		switch (item.getItemId()) {
+			case R.id.menu_increase:
+				queFontSize = queFontSize + 2;
+				ansFontSize = ansFontSize + 2;
+				MyAdapter adapter = new MyAdapter(this, items,
+						true,queFontSize,ansFontSize);
+				setListAdapter(adapter);
+			return true;
+
+			case R.id.menu_decrease:
+				queFontSize = queFontSize - 2;
+				ansFontSize = ansFontSize - 2;
+				adapter = new MyAdapter(this, items,
+						true,queFontSize,ansFontSize);
+				setListAdapter(adapter);
+			return true;
+
+		}
+
 		if (isFromFavourite) {
 			Intent myIntent = new Intent(getApplicationContext(),
 					MainActivity.class);
@@ -159,6 +188,13 @@ public class MainActivity3 extends ListActivity {
 			db.close();
 		}
 
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater menuInflater = getMenuInflater();
+		menuInflater.inflate(R.layout.menu, menu);
+		return true;
 	}
 
 }

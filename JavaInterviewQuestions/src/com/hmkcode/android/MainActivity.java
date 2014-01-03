@@ -2,11 +2,18 @@ package com.hmkcode.android;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 
 public class MainActivity extends Activity implements OnClickListener {
@@ -17,6 +24,12 @@ public class MainActivity extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		/*RelativeLayout rLayout = (RelativeLayout) findViewById (R.layout.activity_main);
+		Resources res = getResources(); //resource handle
+		Drawable drawable = res.getDrawable(R.drawable.background); //new Image that was added to the res folder
+
+		rLayout.setBackgroundDrawable(drawable);*/
 		
 		Button mBtn1 = (Button) findViewById(R.id.button1);
         mBtn1.setOnClickListener(this);
@@ -53,6 +66,7 @@ public class MainActivity extends Activity implements OnClickListener {
         
 	}
 	
+	
 	@Override
 	public void onClick(View v) {
 		Log.i("clicks","You Clicked Start");
@@ -66,6 +80,12 @@ public class MainActivity extends Activity implements OnClickListener {
         Bundle b = new Bundle();
 		b.putString("favourite", "true");
 		i.putExtras(b);
+        startActivity(i);
+	}
+	
+	public void searchQuestions(View v) {
+		Log.i("clicks","You Clicked Start");
+        Intent i=new Intent(MainActivity.this, MainActivity4.class);        
         startActivity(i);
 	}
 	

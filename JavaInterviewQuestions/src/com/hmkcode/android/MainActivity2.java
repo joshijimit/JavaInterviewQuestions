@@ -29,8 +29,6 @@ public class MainActivity2 extends ListActivity {
 	private EditText et;	
 	private ArrayList<String> CATEGORIES = new ArrayList<String>();
 
-	// Search EditText
-	private EditText inputSearch;
 
 	private ArrayList<String> array_sort;
 	int textlength = 0;
