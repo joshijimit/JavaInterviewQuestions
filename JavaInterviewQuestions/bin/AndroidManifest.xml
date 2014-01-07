@@ -8,24 +8,20 @@
     <uses-sdk
         android:minSdkVersion="11"
         android:targetSdkVersion="17" />
-    
-    
-    <user-permission
-        android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/myTheme"        
+        android:theme="@style/CustomActionBarTheme"        
          >
         <activity
             android:name="com.hmkcode.android.MainActivity"
             android:label="@string/app_name" 
+            
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -35,7 +31,6 @@
             >
             <intent-filter>
                 <action android:name="com.hmkcode.android.MainActivity2" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -45,7 +40,6 @@
             >
             <intent-filter>
                 <action android:name="com.hmkcode.android.MainActivity3" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -55,7 +49,6 @@
             >
             <intent-filter>
                 <action android:name="com.hmkcode.android.MainActivity4" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

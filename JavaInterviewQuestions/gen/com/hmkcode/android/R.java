@@ -17,30 +17,33 @@ public final class R {
         public static final int activity_vertical_margin=0x7f040001;
     }
     public static final class drawable {
-        public static final int background=0x7f020000;
-        public static final int btn_star=0x7f020001;
-        public static final int btn_star_big_off=0x7f020002;
-        public static final int btn_star_big_on=0x7f020003;
-        public static final int btn_star_big_on_pressed=0x7f020004;
-        public static final int btn_star_big_on_selected=0x7f020005;
-        public static final int custom_button=0x7f020006;
-        public static final int ic_launcher=0x7f020007;
+        public static final int ab_solid_example=0x7f020000;
+        public static final int background=0x7f020001;
+        public static final int btn_star=0x7f020002;
+        public static final int btn_star_big_off=0x7f020003;
+        public static final int btn_star_big_on=0x7f020004;
+        public static final int btn_star_big_on_pressed=0x7f020005;
+        public static final int btn_star_big_on_selected=0x7f020006;
+        public static final int custom_button=0x7f020007;
+        public static final int ic_launcher=0x7f020008;
     }
     public static final class id {
-        public static final int action_settings=0x7f08000d;
+        public static final int action_settings=0x7f08000f;
         public static final int button1=0x7f080000;
         public static final int editText1=0x7f080003;
-        public static final int favorite_button=0x7f08000b;
-        public static final int label=0x7f080008;
-        public static final int menu_decrease=0x7f080007;
-        public static final int menu_increase=0x7f080006;
+        public static final int favorite_button=0x7f08000d;
+        public static final int label=0x7f08000a;
+        public static final int menu_decrease=0x7f080008;
+        public static final int menu_increase=0x7f080007;
+        public static final int menu_rateit=0x7f080006;
+        public static final int myTitle=0x7f080009;
         public static final int questionListView=0x7f080004;
         public static final int searchQue=0x7f080005;
         public static final int searchQuestions=0x7f080002;
         public static final int showFavourite=0x7f080001;
-        public static final int showHideAns=0x7f08000a;
-        public static final int title=0x7f08000c;
-        public static final int value=0x7f080009;
+        public static final int showHideAns=0x7f08000c;
+        public static final int title=0x7f08000e;
+        public static final int value=0x7f08000b;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -48,9 +51,11 @@ public final class R {
         public static final int activity_main3=0x7f030002;
         public static final int activity_main4=0x7f030003;
         public static final int empty_list_item=0x7f030004;
-        public static final int menu=0x7f030005;
-        public static final int row=0x7f030006;
-        public static final int search_list_item=0x7f030007;
+        public static final int homemenu=0x7f030005;
+        public static final int menu=0x7f030006;
+        public static final int mytitle=0x7f030007;
+        public static final int row=0x7f030008;
+        public static final int search_list_item=0x7f030009;
     }
     public static final class menu {
         public static final int main=0x7f070000;
@@ -61,24 +66,26 @@ public final class R {
         public static final int hello_world=0x7f050002;
     }
     public static final class style {
-        /** 
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    
+        /**   Customize Action bar 
+         */
+        public static final int CustomActionBarTheme=0x7f060000;
+        /**  <style name="myTheme" parent="@android:style/Theme.DeviceDefault">        
+        <item name="android:textColor">#446677</item>        
+    </style>
 
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
+    <style name="myTheme.ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">#a0b5e7</item>
         
+    </style>
+
+    <style name="myTheme.ActionBar.Text" parent="@android:style/TextAppearance">
+        <item name="android:textColor">#446677</item>
+    </style>
+ Customize button 
          */
-        public static final int AppBaseTheme=0x7f060000;
-        /**  Application theme. 
- All customizations that are NOT specific to a particular API-level can go here. 
+        public static final int CustomStyleButton=0x7f060002;
+        /**  ActionBar styles 
          */
-        public static final int AppTheme=0x7f060001;
-        public static final int CustomStyleButton=0x7f060005;
-        public static final int myTheme=0x7f060002;
-        public static final int myTheme_ActionBar=0x7f060003;
-        public static final int myTheme_ActionBar_Text=0x7f060004;
+        public static final int MyActionBar=0x7f060001;
     }
 }
