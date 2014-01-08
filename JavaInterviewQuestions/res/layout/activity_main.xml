@@ -19,30 +19,38 @@
         android:text="Categories"
         android:textSize="20sp" />
 
-     <Button
-         android:id="@+id/showFavourite"
-         style="@style/CustomStyleButton"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignLeft="@+id/searchQuestions"
-         android:layout_alignRight="@+id/searchQuestions"
-         android:layout_below="@+id/searchQuestions"
-         android:layout_marginTop="22dp"
-         android:onClick="showFavourite"
-         android:text="My Favourites"
-         android:textSize="20sp" />
+    <Button
+        android:id="@+id/showFavourite"
+        style="@style/CustomStyleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/searchQuestions"
+        android:layout_alignRight="@+id/searchQuestions"
+        android:layout_below="@+id/searchQuestions"
+        android:layout_marginTop="22dp"
+        android:onClick="showFavourite"
+        android:text="My Favourites"
+        android:textSize="20sp" />
 
-     <Button
-         android:id="@+id/searchQuestions"
-         style="@style/CustomStyleButton"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignLeft="@+id/button1"
-         android:layout_alignRight="@+id/button1"
-         android:layout_below="@+id/button1"
-         android:layout_marginTop="22dp"
-         android:onClick="searchQuestions"
-         android:text="Search Questions"
-         android:textSize="20sp" />
+    <Button
+        android:id="@+id/searchQuestions"
+        style="@style/CustomStyleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button1"
+        android:layout_alignRight="@+id/button1"
+        android:layout_below="@+id/button1"
+        android:layout_marginTop="22dp"
+        android:onClick="searchQuestions"
+        android:text="Search"
+        android:textSize="20sp" />
+
+    <com.startapp.android.publish.banner.Banner
+        android:id="@+id/startAppBanner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/showFavourite"
+        android:layout_alignParentBottom="true" >
+    </com.startapp.android.publish.banner.Banner>
 
 </RelativeLayout>

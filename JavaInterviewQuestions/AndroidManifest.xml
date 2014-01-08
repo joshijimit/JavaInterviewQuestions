@@ -1,57 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.hmkcode.android"
+    package="com.evolvision.android"
     android:versionCode="1"
-    android:versionName="1.0" 
-    >
+    android:versionName="1.0" >
 
     <uses-sdk
         android:minSdkVersion="11"
         android:targetSdkVersion="17" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+	<uses-permission android:name="android.permission.GET_TASKS"/>
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/CustomActionBarTheme"        
-         >
+        android:theme="@style/CustomActionBarTheme" >
         <activity
-            android:name="com.hmkcode.android.MainActivity"
-            android:label="@string/app_name" 
-            
-            >
+            android:name="com.evolvision.android.MainActivity"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.hmkcode.android.MainActivity2"
-            android:label="@string/app_name"
-            >
+            android:name="com.evolvision.android.MainActivity2"
+            android:label="@string/app_name" >
             <intent-filter>
-                <action android:name="com.hmkcode.android.MainActivity2" />
+                <action android:name="com.evolvision.android.MainActivity2" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.hmkcode.android.MainActivity3"
-            android:label="@string/app_name"
-            >
+            android:name="com.evolvision.android.MainActivity3"
+            android:label="@string/app_name" >
             <intent-filter>
-                <action android:name="com.hmkcode.android.MainActivity3" />
+                <action android:name="com.evolvision.android.MainActivity3" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-         <activity
-            android:name="com.hmkcode.android.MainActivity4"
-            android:label="@string/app_name"
-            >
+        <activity
+            android:name="com.evolvision.android.MainActivity4"
+            android:label="@string/app_name" >
             <intent-filter>
-                <action android:name="com.hmkcode.android.MainActivity4" />
+                <action android:name="com.evolvision.android.MainActivity4" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        
+        <activity
+            android:name="com.startapp.android.publish.list3d.List3DActivity"
+            android:taskAffinity="com.evolvision.android.AppWall"
+            android:theme="@android:style/Theme" />
+      
     </application>
 
 </manifest>
