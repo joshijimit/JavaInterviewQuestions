@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class AppRater {
     private final static String APP_TITLE = "JavaInterviewQuestions";
-    private final static String APP_PNAME = "com.evolvision.android";
+    public final static String APP_PNAME = "com.evolvision.android";
     
     private final static int DAYS_UNTIL_PROMPT = 2;
     private final static int LAUNCHES_UNTIL_PROMPT = 5;

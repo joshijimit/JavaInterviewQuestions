@@ -1,28 +1,21 @@
 package com.evolvision.android;
 
 import java.io.IOException;
-import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.app.ListActivity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.Spannable;
-import android.text.SpannableString;
 import android.text.TextWatcher;
-import android.text.style.BackgroundColorSpan;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import com.evolvision.android.model.CurrentRowHolder;
 import com.evolvision.android.model.Item;
@@ -138,22 +131,7 @@ public class MainActivity4 extends ListActivity {
 		return items;
 
 	}
-
-	public void showHideAnsOnClickHandler(View view) {
-
-		CurrentRowHolder holder = (CurrentRowHolder) view.getTag();
-		Button button = holder.getButton();
-		TextView textView = holder.getValue();
-		if (button.getText().equals("Show Answer")) {
-			textView.setVisibility(View.VISIBLE);
-			button.setText("Hide Answer");
-		} else {
-			textView.setVisibility(View.GONE);
-			button.setText("Show Answer");
-		}
-
-	}
-
+	
 	public void onToggleStar(View view) {
 
 		MySQLiteHelper db = new MySQLiteHelper(this);

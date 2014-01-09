@@ -2,8 +2,12 @@ package com.evolvision.android;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -68,6 +72,34 @@ public class MainActivity extends Activity implements OnClickListener {
 		super.onBackPressed();
 		isNewStart = true;		
 		finish();
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater menuInflater = getMenuInflater();
+		menuInflater.inflate(R.layout.menuhome, menu);
+		return true;
+	}
+	
+	public boolean onOptionsItemSelected(MenuItem item) {
+
+		switch (item.getItemId()) {
+			case R.id.menu_rateit:				
+				this.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + AppRater.APP_PNAME)));
+				return true;
+
+			case R.id.menu_feedback:
+				 Intent Email = new Intent(Intent.ACTION_SEND);
+			     Email.setType("text/email");
+			     Email.putExtra(Intent.EXTRA_EMAIL, new String[] { "visionevolving@gmail.com" });
+			     Email.putExtra(Intent.EXTRA_SUBJECT, "Feedback");			     
+			     startActivity(Intent.createChooser(Email, "Send Feedback:"));
+			     return true;
+
+		}
+
+		return true;
+
 	}
 
 }

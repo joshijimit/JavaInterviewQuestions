@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.opengl.Visibility;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -83,14 +84,13 @@ public class MyAdapter extends ArrayAdapter<Item> {
 			if (itemsArrayList.get(position).getIsFavourite() == 1) {
 				buttonFav.setSelected(true);
 			}
-
+			
 			if(searchText != null){
 				// 4. Set the text for textView
 				labelView.setText(CommonFunctions.highlight(searchText, itemsArrayList.get(position).getTitle()));
 			}else{
 				labelView.setText(itemsArrayList.get(position).getTitle());
 			}
-			
 			labelView.setTextSize(queFontSize);
 			labelView.setTextColor(Color.BLUE);
 			
@@ -100,13 +100,12 @@ public class MyAdapter extends ArrayAdapter<Item> {
 			}else{
 				valueView.setText(itemsArrayList.get(position).getDescription());
 			}
-			
 			valueView.setTextSize(ansFontSize);
 			valueView.setTextColor(Color.BLACK);
-
-			if(searchText != null &&  itemsArrayList.get(position).getDescription().toUpperCase().contains(searchText.toUpperCase())){
+			
+			if(searchText != null){
+				button.setVisibility(View.GONE);
 				valueView.setVisibility(View.VISIBLE);
-				button.setText("Hide Answer");
 			}
 			
 			CurrentRowHolder holder = new CurrentRowHolder();
