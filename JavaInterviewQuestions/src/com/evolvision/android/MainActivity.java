@@ -50,11 +50,11 @@ public class MainActivity extends Activity implements OnClickListener {
 		startActivity(i);
 	}
 
-	public void showFavourite(View v) {
+	public void showFavorite(View v) {
 		Log.i("clicks", "You Clicked Start");
 		Intent i = new Intent(MainActivity.this, MainActivity3.class);
 		Bundle b = new Bundle();
-		b.putString("favourite", "true");
+		b.putString("Favorite", "true");
 		i.putExtras(b);
 		startActivity(i);
 	}

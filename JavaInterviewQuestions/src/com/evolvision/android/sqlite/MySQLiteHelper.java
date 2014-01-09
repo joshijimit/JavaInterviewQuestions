@@ -351,7 +351,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 				questions.set_ID(cursor.getInt(0));
 				questions.setQuestion(cursor.getString(1));
 				questions.setAnswer(cursor.getString(2));
-				questions.setIsFavourite(cursor.getInt(3));
+				questions.setIsFavorite(cursor.getInt(3));
 
 				// Add Category to Categories
 				questionsList.add(questions);
@@ -384,7 +384,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 					questions.set_ID(cursor.getInt(0));
 					questions.setQuestion(cursor.getString(1));
 					questions.setAnswer(cursor.getString(2));
-					questions.setIsFavourite(cursor.getInt(3));
+					questions.setIsFavorite(cursor.getInt(3));
 
 					// Add Category to Categories
 					questionsList.add(questions);
@@ -440,7 +440,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	}
 	
 	// Updating single Category
-	public int updateFavourite(Integer questionId, int value) {
+	public int updateFavorite(Integer questionId, int value) {
 
 			// 1. get reference to writable DB
 			SQLiteDatabase db = this.getWritableDatabase();
@@ -463,7 +463,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
 	}
 	
-	public List<Questions> getFavouriteQustions(){
+	public List<Questions> getFavoriteQustions(){
 		List<Questions> questionsList = new LinkedList<Questions>();
 
 		// 1. build the query
@@ -481,7 +481,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 				questions.set_ID(cursor.getInt(0));
 				questions.setQuestion(cursor.getString(1));
 				questions.setAnswer(cursor.getString(2));
-				questions.setIsFavourite(cursor.getInt(3));
+				questions.setIsFavorite(cursor.getInt(3));
 				
 				// Add Category to Categories
 				questionsList.add(questions);

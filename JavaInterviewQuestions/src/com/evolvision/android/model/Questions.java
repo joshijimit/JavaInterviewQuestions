@@ -8,7 +8,7 @@ public class Questions {
 	private String categoryID;
 	private String question;
 	private String answer;
-	private int isFavourite;
+	private int isFavorite;
 	
 	public int get_ID() {
 		return _ID;
@@ -34,11 +34,11 @@ public class Questions {
 	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
-	public int getIsFavourite() {
-		return isFavourite;
+	public int getIsFavorite() {
+		return isFavorite;
 	}
-	public void setIsFavourite(int isFavourite) {
-		this.isFavourite = isFavourite;
+	public void setIsFavorite(int isFavorite) {
+		this.isFavorite = isFavorite;
 	}
 	
 	

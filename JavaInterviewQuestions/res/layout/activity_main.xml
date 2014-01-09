@@ -20,7 +20,7 @@
         android:textSize="20sp" />
 
     <Button
-        android:id="@+id/showFavourite"
+        android:id="@+id/showFavorite"
         style="@style/CustomStyleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,8 +28,8 @@
         android:layout_alignRight="@+id/searchQuestions"
         android:layout_below="@+id/searchQuestions"
         android:layout_marginTop="22dp"
-        android:onClick="showFavourite"
-        android:text="My Favourites"
+        android:onClick="showFavorite"
+        android:text="My Favorites"
         android:textSize="20sp" />
 
     <Button
@@ -49,7 +49,7 @@
         android:id="@+id/startAppBanner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/showFavourite"
+        android:layout_alignLeft="@+id/showFavorite"
         android:layout_alignParentBottom="true" >
     </com.startapp.android.publish.banner.Banner>
 

@@ -41,7 +41,7 @@ public final class R {
         public static final int questionListView=0x7f080005;
         public static final int searchQue=0x7f080006;
         public static final int searchQuestions=0x7f080002;
-        public static final int showFavourite=0x7f080001;
+        public static final int showFavorite=0x7f080001;
         public static final int showHideAns=0x7f08000e;
         public static final int startAppBanner=0x7f080003;
         public static final int title=0x7f080010;

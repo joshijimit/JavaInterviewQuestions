@@ -119,7 +119,7 @@ public class MainActivity4 extends ListActivity {
 
 			for (Questions question : list) {
 				items.add(new Item(question.get_ID(), question.getQuestion(),
-						question.getAnswer(), question.getIsFavourite()));
+						question.getAnswer(), question.getIsFavorite()));
 			}
 
 		} catch (IOException e) {
@@ -143,13 +143,13 @@ public class MainActivity4 extends ListActivity {
 			ImageButton buttonFav = holder.getButtonFav();
 			if (buttonFav.isSelected()) {
 				buttonFav.setSelected(false);
-				db.updateFavourite(holder.getQuestionID(), 0);
-				// Toast.makeText(this, "Favourite removed successfully",
+				db.updateFavorite(holder.getQuestionID(), 0);
+				// Toast.makeText(this, "Favorite removed successfully",
 				// Toast.LENGTH_SHORT).show();
 			} else {
 				buttonFav.setSelected(true);
-				db.updateFavourite(holder.getQuestionID(), 1);
-				// Toast.makeText(this, "Favourite added successfully",
+				db.updateFavorite(holder.getQuestionID(), 1);
+				// Toast.makeText(this, "Favorite added successfully",
 				// Toast.LENGTH_SHORT).show();
 			}
 

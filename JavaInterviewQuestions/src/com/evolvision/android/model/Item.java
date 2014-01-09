@@ -5,14 +5,14 @@ public class Item {
 	private Integer ID;
 	private String title;
 	private String description;
-	private int isFavourite;
+	private int isFavorite;
 	
-	public Item(Integer ID,String title, String description, int isFavourite) {
+	public Item(Integer ID,String title, String description, int isFavorite) {
 		super();
 		this.ID = ID;
 		this.title = title;
 		this.description = description;
-		this.isFavourite = isFavourite;
+		this.isFavorite = isFavorite;
 	}
 	public String getTitle() {
 		return title;
@@ -33,11 +33,11 @@ public class Item {
 		ID = iD;
 	}
 	
-	public int getIsFavourite() {
-		return isFavourite;
+	public int getIsFavorite() {
+		return isFavorite;
 	}
-	public void setIsFavourite(int isFavourite) {
-		this.isFavourite = isFavourite;
+	public void setIsFavorite(int isFavorite) {
+		this.isFavorite = isFavorite;
 	}	
 	
 }

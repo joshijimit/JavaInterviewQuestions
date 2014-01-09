@@ -15,7 +15,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.evolvision.android.model.CurrentRowHolder;
 import com.evolvision.android.model.Item;
@@ -24,7 +23,7 @@ import com.evolvision.android.sqlite.MySQLiteHelper;
 
 public class MainActivity3 extends ListActivity {
 
-	private boolean isFromFavourite = false;
+	private boolean isFromFavorite = false;
 	private int queFontSize = 20;
 	private int ansFontSize = 18;
 	ArrayList<Item> items = new ArrayList<Item>();
@@ -36,12 +35,12 @@ public class MainActivity3 extends ListActivity {
 
 		getActionBar().setDisplayHomeAsUpEnabled(true);		
 		
-		String isFavourite = getIntent().getStringExtra("favourite");
-		if (isFavourite != null) {
-			setTitle("My Favourite");
-			items = loadFavourites();
+		String isFavorite = getIntent().getStringExtra("Favorite");
+		if (isFavorite != null) {
+			setTitle("My Favorites");
+			items = loadFavorites();
 			MyAdapter adapter = new MyAdapter(this, items, true,queFontSize,ansFontSize);
-			isFromFavourite = true;
+			isFromFavorite = true;
 			setListAdapter(adapter);
 		} else {
 			setTitle("Questions");
@@ -85,7 +84,7 @@ public class MainActivity3 extends ListActivity {
 
 		}
 
-		if (isFromFavourite) {
+		if (isFromFavorite) {
 			Intent myIntent = new Intent(getApplicationContext(),
 					MainActivity.class);
 			startActivityForResult(myIntent, 0);
@@ -110,7 +109,7 @@ public class MainActivity3 extends ListActivity {
 
 			for (Questions question : list) {
 				items.add(new Item(question.get_ID(), question.getQuestion(),
-						question.getAnswer(), question.getIsFavourite()));
+						question.getAnswer(), question.getIsFavorite()));
 			}
 
 		} catch (IOException e) {
@@ -123,18 +122,18 @@ public class MainActivity3 extends ListActivity {
 
 	}
 
-	private ArrayList<Item> loadFavourites() {
+	private ArrayList<Item> loadFavorites() {
 
 		ArrayList<Item> items = new ArrayList<Item>();
 		MySQLiteHelper db = new MySQLiteHelper(this);
 		try {
 			db.createDataBase();
 			db.openDataBase();
-			List<Questions> list = db.getFavouriteQustions();
+			List<Questions> list = db.getFavoriteQustions();
 
 			for (Questions question : list) {
 				items.add(new Item(question.get_ID(), question.getQuestion(),
-						question.getAnswer(), question.getIsFavourite()));
+						question.getAnswer(), question.getIsFavorite()));
 			}
 
 		} catch (IOException e) {
@@ -173,13 +172,13 @@ public class MainActivity3 extends ListActivity {
 			ImageButton buttonFav = holder.getButtonFav();
 			if (buttonFav.isSelected()) {
 				buttonFav.setSelected(false);
-				db.updateFavourite(holder.getQuestionID(), 0);
-				// Toast.makeText(this, "Favourite removed successfully",
+				db.updateFavorite(holder.getQuestionID(), 0);
+				// Toast.makeText(this, "Favorite removed successfully",
 				// Toast.LENGTH_SHORT).show();
 			} else {
 				buttonFav.setSelected(true);
-				db.updateFavourite(holder.getQuestionID(), 1);
-				// Toast.makeText(this, "Favourite added successfully",
+				db.updateFavorite(holder.getQuestionID(), 1);
+				// Toast.makeText(this, "Favorite added successfully",
 				// Toast.LENGTH_SHORT).show();
 			}
 

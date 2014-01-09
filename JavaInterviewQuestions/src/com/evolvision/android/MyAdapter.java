@@ -56,7 +56,7 @@ public class MyAdapter extends ArrayAdapter<Item> {
 		
 		if (itemsArrayList.size() == 0 && showNoRecordFound) {
 			TextView message = new TextView(context);
-			message.setText("No Favourite found.");
+			message.setText("No Favorite found.");
 			message.setTextSize(16);
 			message.setTextColor(Color.RED);
 			message.setLayoutParams(new RelativeLayout.LayoutParams(
@@ -81,7 +81,7 @@ public class MyAdapter extends ArrayAdapter<Item> {
 
 			buttonFav.setImageDrawable(getContext().getResources().getDrawable(
 					R.drawable.btn_star));
-			if (itemsArrayList.get(position).getIsFavourite() == 1) {
+			if (itemsArrayList.get(position).getIsFavorite() == 1) {
 				buttonFav.setSelected(true);
 			}
 			
