@@ -8,6 +8,7 @@ public class CurrentRowHolder {
 	
 	public Integer questionID;
 	public TextView value;
+	public TextView question;
 	public Button button;
 	public ImageButton buttonFav;
 	public ImageButton getButtonFav() {
@@ -33,6 +34,12 @@ public class CurrentRowHolder {
 	}
 	public void setQuestionID(Integer questionID) {
 		this.questionID = questionID;
+	}
+	public TextView getQuestion() {
+		return question;
+	}
+	public void setQuestion(TextView question) {
+		this.question = question;
 	}
 	
 	

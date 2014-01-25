@@ -78,6 +78,8 @@ public class MyAdapter extends ArrayAdapter<Item> {
 			Button button = (Button) rowView.findViewById(R.id.showHideAns);
 			ImageButton buttonFav = (ImageButton) rowView
 					.findViewById(R.id.favorite_button);
+			ImageButton buttonShare = (ImageButton) rowView
+					.findViewById(R.id.share_button);
 
 			buttonFav.setImageDrawable(getContext().getResources().getDrawable(
 					R.drawable.btn_star));
@@ -110,12 +112,14 @@ public class MyAdapter extends ArrayAdapter<Item> {
 			
 			CurrentRowHolder holder = new CurrentRowHolder();
 			holder.setQuestionID(itemsArrayList.get(position).getID());
+			holder.setQuestion(labelView);
 			holder.setButton(button);
 			holder.setButtonFav(buttonFav);
 			holder.setValue(valueView);
 
 			button.setTag(holder);
 			buttonFav.setTag(holder);
+			buttonShare.setTag(holder);
 			// 5. retrn rowView
 			return rowView;
 		}else{

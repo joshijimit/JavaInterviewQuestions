@@ -26,9 +26,10 @@ public final class R {
         public static final int btn_star_big_on_selected=0x7f020006;
         public static final int custom_button=0x7f020007;
         public static final int ic_launcher=0x7f020008;
+        public static final int ic_menu_share=0x7f020009;
     }
     public static final class id {
-        public static final int action_settings=0x7f080011;
+        public static final int action_settings=0x7f080012;
         public static final int button1=0x7f080000;
         public static final int editText1=0x7f080004;
         public static final int favorite_button=0x7f08000f;
@@ -41,10 +42,11 @@ public final class R {
         public static final int questionListView=0x7f080005;
         public static final int searchQue=0x7f080006;
         public static final int searchQuestions=0x7f080002;
+        public static final int share_button=0x7f080010;
         public static final int showFavorite=0x7f080001;
         public static final int showHideAns=0x7f08000e;
         public static final int startAppBanner=0x7f080003;
-        public static final int title=0x7f080010;
+        public static final int title=0x7f080011;
         public static final int value=0x7f08000d;
     }
     public static final class layout {
