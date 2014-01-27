@@ -26,7 +26,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	private static String DB_PATH = "/data/data/com.evolvision.android/databases/";
 
 	// Database Version
-	private static final int DATABASE_VERSION = 1;
+	private static final int DATABASE_VERSION = 2;
 	// Database Name
 	private static final String DATABASE_NAME = "Interviews";
 

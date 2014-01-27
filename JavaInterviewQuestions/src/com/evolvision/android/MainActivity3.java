@@ -20,6 +20,7 @@ import com.evolvision.android.model.CurrentRowHolder;
 import com.evolvision.android.model.Item;
 import com.evolvision.android.model.Questions;
 import com.evolvision.android.sqlite.MySQLiteHelper;
+import com.evolvision.android.utility.CommonFunctions;
 
 public class MainActivity3 extends ListActivity {
 
@@ -189,6 +190,22 @@ public class MainActivity3 extends ListActivity {
 			db.close();
 		}
 
+	}
+	
+	public void onShareQuestion(View view){
+		
+		CurrentRowHolder holder = (CurrentRowHolder) view.getTag();
+		
+		TextView question = holder.getQuestion();
+		TextView ans = holder.getValue();
+		
+		Intent Email = new Intent(Intent.ACTION_SEND);
+	    Email.setType("text/email");
+	    
+	    Email.putExtra(Intent.EXTRA_SUBJECT, "Sharing Interview Question");	
+	    Email.putExtra(Intent.EXTRA_TEXT, CommonFunctions.buildShareQuestion(question.getText().toString(), ans.getText().toString()));
+	    startActivity(Intent.createChooser(Email, "Share through eMail"));
+		
 	}
 
 	@Override

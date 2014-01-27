@@ -34,4 +34,24 @@ public class CommonFunctions {
 	        return highlighted;
 	    }
 	}
+	
+	public static String buildShareQuestion(String question,String ans){
+		
+		StringBuilder builder = new StringBuilder();
+		builder.append(question);
+		builder.append("\n\n");
+		builder.append(ans);
+		builder.append("\n\n");
+		builder.append("Shared from Java Interview Question.");
+		builder.append("\n");
+		builder.append("To download this application please visit below URL.");
+		builder.append("\n\n");
+		builder.append("https://play.google.com/store/apps/details?id=com.evolvision.android");
+		builder.append("\n\n");
+		builder.append("Regards,");
+		builder.append("\n");
+		builder.append("Evolving Vision Team.");
+		
+		return builder.toString();
+	}
 }

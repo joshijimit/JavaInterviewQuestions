@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_gravity="fill"
@@ -38,6 +37,7 @@
          android:text="Show Answer"
          android:textSize="12sp" />
 
+      
      <ImageButton
          android:id="@+id/favorite_button"
          android:layout_width="wrap_content"
@@ -49,5 +49,17 @@
          android:onClick="onToggleStar"
          android:saveEnabled="true"
          android:src="@android:drawable/btn_star" />
+     
+      <ImageButton
+          android:id="@+id/share_button"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@id/value"
+          android:layout_toLeftOf="@id/favorite_button"          
+          android:background="#00ffffff"
+          android:onClick="onShareQuestion"
+          android:saveEnabled="true"
+          android:src="@android:drawable/ic_menu_share" />
+     
      
 </RelativeLayout>
