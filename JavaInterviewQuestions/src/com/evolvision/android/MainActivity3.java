@@ -21,6 +21,7 @@ import com.evolvision.android.model.Item;
 import com.evolvision.android.model.Questions;
 import com.evolvision.android.sqlite.MySQLiteHelper;
 import com.evolvision.android.utility.CommonFunctions;
+import com.google.analytics.tracking.android.EasyTracker;
 
 public class MainActivity3 extends ListActivity {
 
@@ -63,7 +64,19 @@ public class MainActivity3 extends ListActivity {
 		}
 
 	}
+	
+	@Override
+	public void onStart() {
+		super.onStart();
+		EasyTracker.getInstance(this).activityStart(this); // Add this method.
+	}
 
+	@Override
+	public void onStop() {
+		super.onStop();
+		EasyTracker.getInstance(this).activityStop(this); // Add this method.
+	}
+	
 	public boolean onOptionsItemSelected(MenuItem item) {
 
 		switch (item.getItemId()) {

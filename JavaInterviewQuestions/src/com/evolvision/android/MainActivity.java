@@ -13,12 +13,14 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.evolvision.android.utility.AppRater;
+import com.google.analytics.tracking.android.EasyTracker;
 import com.startapp.android.publish.StartAppAd;
 
 public class MainActivity extends Activity implements OnClickListener {
 
 	private static boolean isNewStart = true;
-	//private StartAppAd startAppAd = new StartAppAd(this);
+
+	// private StartAppAd startAppAd = new StartAppAd(this);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +39,22 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	}
 
-	/*@Override
-	public void onResume() {
-		super.onResume();
-		startAppAd.onResume();
-	}*/
+	@Override
+	public void onStart() {
+		super.onStart();
+		EasyTracker.getInstance(this).activityStart(this); // Add this method.
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		EasyTracker.getInstance(this).activityStop(this); // Add this method.
+	}
+
+	/*
+	 * @Override public void onResume() { super.onResume();
+	 * startAppAd.onResume(); }
+	 */
 
 	@Override
 	public void onClick(View v) {
@@ -61,8 +74,8 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	public void searchQuestions(View v) {
 		Log.i("clicks", "You Clicked Start");
-		//startAppAd.showAd(); // show the ad
-		//startAppAd.loadAd(); // load the next ad
+		// startAppAd.showAd(); // show the ad
+		// startAppAd.loadAd(); // load the next ad
 		Intent i = new Intent(MainActivity.this, MainActivity4.class);
 		startActivity(i);
 	}
@@ -70,31 +83,33 @@ public class MainActivity extends Activity implements OnClickListener {
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();
-		isNewStart = true;		
+		isNewStart = true;
 		finish();
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater menuInflater = getMenuInflater();
 		menuInflater.inflate(R.layout.menuhome, menu);
 		return true;
 	}
-	
+
 	public boolean onOptionsItemSelected(MenuItem item) {
 
 		switch (item.getItemId()) {
-			case R.id.menu_rateit:				
-				this.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + AppRater.APP_PNAME)));
-				return true;
+		case R.id.menu_rateit:
+			this.startActivity(new Intent(Intent.ACTION_VIEW, Uri
+					.parse("market://details?id=" + AppRater.APP_PNAME)));
+			return true;
 
-			case R.id.menu_feedback:
-				 Intent Email = new Intent(Intent.ACTION_SEND);
-			     Email.setType("text/email");
-			     Email.putExtra(Intent.EXTRA_EMAIL, new String[] { "visionevolving@gmail.com" });
-			     Email.putExtra(Intent.EXTRA_SUBJECT, "Feedback");			     
-			     startActivity(Intent.createChooser(Email, "Send Feedback:"));
-			     return true;
+		case R.id.menu_feedback:
+			Intent Email = new Intent(Intent.ACTION_SEND);
+			Email.setType("text/email");
+			Email.putExtra(Intent.EXTRA_EMAIL,
+					new String[] { "visionevolving@gmail.com" });
+			Email.putExtra(Intent.EXTRA_SUBJECT, "Feedback");
+			startActivity(Intent.createChooser(Email, "Send Feedback:"));
+			return true;
 
 		}
 

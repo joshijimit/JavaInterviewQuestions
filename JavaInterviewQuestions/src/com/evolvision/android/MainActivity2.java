@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 import com.evolvision.android.model.Categories;
 import com.evolvision.android.sqlite.MySQLiteHelper;
+import com.google.analytics.tracking.android.EasyTracker;
 
 public class MainActivity2 extends ListActivity {
 
@@ -88,7 +89,19 @@ public class MainActivity2 extends ListActivity {
 		getListView().setTextFilterEnabled(true);
 
 	}
+	
+	@Override
+	public void onStart() {
+		super.onStart();
+		EasyTracker.getInstance(this).activityStart(this); // Add this method.
+	}
 
+	@Override
+	public void onStop() {
+		super.onStop();
+		EasyTracker.getInstance(this).activityStop(this); // Add this method.
+	}
+	
 	private void loadCategoriesFromDB() {
 
 		MySQLiteHelper db = new MySQLiteHelper(this);

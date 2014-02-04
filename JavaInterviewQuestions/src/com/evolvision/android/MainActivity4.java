@@ -23,6 +23,7 @@ import com.evolvision.android.model.Item;
 import com.evolvision.android.model.Questions;
 import com.evolvision.android.sqlite.MySQLiteHelper;
 import com.evolvision.android.utility.CommonFunctions;
+import com.google.analytics.tracking.android.EasyTracker;
 
 public class MainActivity4 extends ListActivity {
 
@@ -73,7 +74,19 @@ public class MainActivity4 extends ListActivity {
 		getListView().setTextFilterEnabled(true);
 
 	}
+	
+	@Override
+	public void onStart() {
+		super.onStart();
+		EasyTracker.getInstance(this).activityStart(this); // Add this method.
+	}
 
+	@Override
+	public void onStop() {
+		super.onStop();
+		EasyTracker.getInstance(this).activityStop(this); // Add this method.
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater menuInflater = getMenuInflater();
