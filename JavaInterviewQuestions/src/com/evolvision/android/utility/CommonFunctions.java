@@ -2,6 +2,8 @@ package com.evolvision.android.utility;
 
 import java.text.Normalizer;
 
+import com.evolvision.android.MainActivity;
+
 import android.graphics.Color;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -25,8 +27,10 @@ public class CommonFunctions {
 	        while (start >= 0) {
 	            int spanStart = Math.min(start, originalText.length());
 	            int spanEnd = Math.min(start + search.length(), originalText.length());
-
-	            highlighted.setSpan(new BackgroundColorSpan(Color.YELLOW), spanStart, spanEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+	            if(MainActivity.isNightMode)
+	            	highlighted.setSpan(new BackgroundColorSpan(Color.GREEN), spanStart, spanEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+	            else
+	            	highlighted.setSpan(new BackgroundColorSpan(Color.YELLOW), spanStart, spanEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 	            start = normalizedText.indexOf(search, spanEnd);
 	        }

@@ -8,6 +8,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -20,6 +21,7 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.evolvision.android.model.Categories;
 import com.evolvision.android.sqlite.MySQLiteHelper;
@@ -37,11 +39,18 @@ public class MainActivity2 extends ListActivity {
 	@SuppressLint("NewApi")
 	@Override
 	public void onCreate(Bundle icicle) {
+		
+		if(MainActivity.isNightMode){
+			setTheme(android.R.style.Theme_Black);
+		}
+		
 		super.onCreate(icicle);
 
 		setContentView(R.layout.activity_main2);
 		setTitle("Categories");
-		getActionBar().setDisplayHomeAsUpEnabled(true);		
+		if(!MainActivity.isNightMode){
+			getActionBar().setDisplayHomeAsUpEnabled(true);			
+		}
 
 		et = (EditText) findViewById(R.id.editText1);		
 
@@ -178,7 +187,12 @@ public class MainActivity2 extends ListActivity {
 			row = inflater.inflate(R.layout.search_list_item, null);
 
 			TextView tv = (TextView) row.findViewById(R.id.title);
-
+			
+			if(MainActivity.isNightMode)
+				tv.setTextColor(Color.WHITE);
+			else
+				tv.setTextColor(Color.BLACK);
+			
 			tv.setText(array_sort.get(position));
 
 			return row;

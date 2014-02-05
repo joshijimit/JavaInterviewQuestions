@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.evolvision.android.model.CurrentRowHolder;
 import com.evolvision.android.model.Item;
@@ -39,11 +40,19 @@ public class MainActivity4 extends ListActivity {
 	@SuppressLint("NewApi")
 	@Override
 	public void onCreate(Bundle icicle) {
+		
+		if(MainActivity.isNightMode){
+			setTheme(android.R.style.Theme_Black);
+		}
+		
 		super.onCreate(icicle);
 
 		setContentView(R.layout.activity_main4);
 		setTitle("Search");
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+		if(!MainActivity.isNightMode){
+			getActionBar().setDisplayHomeAsUpEnabled(true);
+		}
+
 
 		et = (EditText) findViewById(R.id.searchQue);
 		questions = loadAllQuestionsFromDB();

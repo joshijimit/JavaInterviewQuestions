@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.evolvision.android.model.CurrentRowHolder;
 import com.evolvision.android.model.Item;
@@ -33,9 +34,17 @@ public class MainActivity3 extends ListActivity {
 	@SuppressLint("NewApi")
 	@Override
 	public void onCreate(Bundle icicle) {
+		
+		if(MainActivity.isNightMode){
+			setTheme(android.R.style.Theme_Black);
+		}
+		
 		super.onCreate(icicle);
 
-		getActionBar().setDisplayHomeAsUpEnabled(true);		
+		if(!MainActivity.isNightMode){
+			getActionBar().setDisplayHomeAsUpEnabled(true);			
+		}
+
 		
 		String isFavorite = getIntent().getStringExtra("Favorite");
 		if (isFavorite != null) {

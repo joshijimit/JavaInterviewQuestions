@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.evolvision.android.utility.AppRater;
 import com.google.analytics.tracking.android.EasyTracker;
@@ -19,14 +20,20 @@ import com.startapp.android.publish.StartAppAd;
 public class MainActivity extends Activity implements OnClickListener {
 
 	private static boolean isNewStart = true;
-
+	public static boolean isNightMode = false;
 	// private StartAppAd startAppAd = new StartAppAd(this);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-
+		
+		if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB){
+			isNightMode = true;
+			Button butNightMode = (Button) findViewById(R.id.nightMode); 
+			butNightMode.setVisibility(View.GONE);
+		}
+		
 		StartAppAd.init(this, "101473701", "201025652");
 		setContentView(R.layout.activity_main);
 
@@ -64,16 +71,35 @@ public class MainActivity extends Activity implements OnClickListener {
 	}
 
 	public void showFavorite(View v) {
-		Log.i("clicks", "You Clicked Start");
+		Log.i("clicks", "You Clicked Show Favourit");
 		Intent i = new Intent(MainActivity.this, MainActivity3.class);
 		Bundle b = new Bundle();
 		b.putString("Favorite", "true");
 		i.putExtras(b);
 		startActivity(i);
 	}
+	
+	public void changeToNightMode(View v) {
+		Log.i("clicks", "You Clicked night mode");
+		
+		Button butNightMode = (Button) findViewById(R.id.nightMode); 
+		
+		if(isNightMode){
+			isNightMode = false;
+			butNightMode.setText("Turn night mode ON");
+			Toast.makeText(getApplicationContext(), "Night Mode Deactivated", Toast.LENGTH_SHORT).show();
+		}else{
+			isNightMode = true;
+			butNightMode.setText("Turn night mode OFF");
+			Toast.makeText(getApplicationContext(), "Night Mode Activated.", Toast.LENGTH_SHORT).show();
+		}
+		
+		//Intent i = new Intent(MainActivity.this, MainActivity2.class);
+		//startActivity(i);
+	}
 
 	public void searchQuestions(View v) {
-		Log.i("clicks", "You Clicked Start");
+		Log.i("clicks", "You Clicked search");
 		// startAppAd.showAd(); // show the ad
 		// startAppAd.loadAd(); // load the next ad
 		Intent i = new Intent(MainActivity.this, MainActivity4.class);

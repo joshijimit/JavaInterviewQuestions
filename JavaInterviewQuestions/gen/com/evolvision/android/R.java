@@ -37,25 +37,26 @@ public final class R {
         public static final int ic_menu_share=0x7f020009;
     }
     public static final class id {
-        public static final int action_settings=0x7f090012;
+        public static final int action_settings=0x7f090013;
         public static final int button1=0x7f090000;
-        public static final int editText1=0x7f090004;
-        public static final int favorite_button=0x7f09000f;
-        public static final int label=0x7f09000c;
-        public static final int menu_decrease=0x7f090008;
-        public static final int menu_feedback=0x7f09000a;
-        public static final int menu_increase=0x7f090007;
-        public static final int menu_rateit=0x7f090009;
-        public static final int myTitle=0x7f09000b;
-        public static final int questionListView=0x7f090005;
-        public static final int searchQue=0x7f090006;
+        public static final int editText1=0x7f090005;
+        public static final int favorite_button=0x7f090010;
+        public static final int label=0x7f09000d;
+        public static final int menu_decrease=0x7f090009;
+        public static final int menu_feedback=0x7f09000b;
+        public static final int menu_increase=0x7f090008;
+        public static final int menu_rateit=0x7f09000a;
+        public static final int myTitle=0x7f09000c;
+        public static final int nightMode=0x7f090003;
+        public static final int questionListView=0x7f090006;
+        public static final int searchQue=0x7f090007;
         public static final int searchQuestions=0x7f090002;
-        public static final int share_button=0x7f090010;
+        public static final int share_button=0x7f090011;
         public static final int showFavorite=0x7f090001;
-        public static final int showHideAns=0x7f09000e;
-        public static final int startAppBanner=0x7f090003;
-        public static final int title=0x7f090011;
-        public static final int value=0x7f09000d;
+        public static final int showHideAns=0x7f09000f;
+        public static final int startAppBanner=0x7f090004;
+        public static final int title=0x7f090012;
+        public static final int value=0x7f09000e;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;

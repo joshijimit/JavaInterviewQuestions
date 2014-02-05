@@ -94,7 +94,11 @@ public class MyAdapter extends ArrayAdapter<Item> {
 				labelView.setText(itemsArrayList.get(position).getTitle());
 			}
 			labelView.setTextSize(queFontSize);
-			labelView.setTextColor(Color.BLUE);
+			
+			if(MainActivity.isNightMode)
+				labelView.setTextColor(Color.WHITE);
+			else
+				labelView.setTextColor(Color.BLUE);
 			
 			if(searchText != null){
 				// 4. Set the text for textView				
@@ -103,7 +107,11 @@ public class MyAdapter extends ArrayAdapter<Item> {
 				valueView.setText(itemsArrayList.get(position).getDescription());
 			}
 			valueView.setTextSize(ansFontSize);
-			valueView.setTextColor(Color.BLACK);
+			
+			if(MainActivity.isNightMode)
+				valueView.setTextColor(Color.WHITE);
+			else
+				valueView.setTextColor(Color.BLACK);
 			
 			if(searchText != null){
 				button.setVisibility(View.GONE);
