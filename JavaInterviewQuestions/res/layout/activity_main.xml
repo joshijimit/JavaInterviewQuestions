@@ -19,7 +19,7 @@
         android:text="Categories"
         android:textSize="20sp" />
 
-    <Button
+   <Button
         android:id="@+id/showFavorite"
         style="@style/CustomStyleButton"
         android:layout_width="wrap_content"

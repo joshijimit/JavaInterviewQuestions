@@ -203,7 +203,7 @@ public class MainActivity4 extends ListActivity {
 	}
 
 	private void AlterAdapter() {
-		if (et.getText().toString().isEmpty()) {
+		if (et.getText().toString().equals("")) {
 			array_sort.clear();			
 			adapter.notifyDataSetChanged();
 		} else {

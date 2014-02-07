@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.evolvision.android.utility.AppRater;
@@ -21,18 +22,13 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	private static boolean isNewStart = true;
 	public static boolean isNightMode = false;
+	
 	// private StartAppAd startAppAd = new StartAppAd(this);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-		
-		if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB){
-			isNightMode = true;
-			Button butNightMode = (Button) findViewById(R.id.nightMode); 
-			butNightMode.setVisibility(View.GONE);
-		}
 		
 		StartAppAd.init(this, "101473701", "201025652");
 		setContentView(R.layout.activity_main);
@@ -42,6 +38,11 @@ public class MainActivity extends Activity implements OnClickListener {
 		if (isNewStart) {
 			AppRater.app_launched(this);
 			isNewStart = false;
+		}
+		if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB){
+			isNightMode = true;
+			Button btn = (Button) findViewById(R.id.nightMode);
+			btn.setVisibility(View.GONE);
 		}
 
 	}
