@@ -30,8 +30,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		
 		if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB){
 			isNightMode = true;
-			Button butNightMode = (Button) findViewById(R.id.nightMode); 
-			butNightMode.setVisibility(View.GONE);
+			
 		}
 		
 		StartAppAd.init(this, "101473701", "201025652");
@@ -43,6 +42,8 @@ public class MainActivity extends Activity implements OnClickListener {
 			AppRater.app_launched(this);
 			isNewStart = false;
 		}
+		Button butNightMode = (Button) findViewById(R.id.nightMode); 
+		butNightMode.setVisibility(View.GONE);
 
 	}
 
