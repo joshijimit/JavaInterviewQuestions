@@ -42,9 +42,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			AppRater.app_launched(this);
 			isNewStart = false;
 		}
-		Button butNightMode = (Button) findViewById(R.id.nightMode); 
-		butNightMode.setVisibility(View.GONE);
-
+		
 	}
 
 	@Override

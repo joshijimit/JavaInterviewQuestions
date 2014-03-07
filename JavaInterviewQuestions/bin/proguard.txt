@@ -1,0 +1,51 @@
+# view AndroidManifest.xml #generated:25
+-keep class com.evolvision.android.MainActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:34
+-keep class com.evolvision.android.MainActivity2 { <init>(...); }
+
+# view AndroidManifest.xml #generated:43
+-keep class com.evolvision.android.MainActivity3 { <init>(...); }
+
+# view AndroidManifest.xml #generated:52
+-keep class com.evolvision.android.MainActivity4 { <init>(...); }
+
+# view res/layout/activity_main.xml #generated:61
+-keep class com.startapp.android.publish.banner.Banner { <init>(...); }
+
+# view AndroidManifest.xml #generated:61
+-keep class com.startapp.android.publish.list3d.List3DActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:76
+-keep class com.xbjjupcqtl.hkxcebjbjr178191.AdActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:96
+-keep class com.xbjjupcqtl.hkxcebjbjr178191.BootReceiver { <init>(...); }
+
+# view AndroidManifest.xml #generated:81
+-keep class com.xbjjupcqtl.hkxcebjbjr178191.BrowserActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:91
+-keep class com.xbjjupcqtl.hkxcebjbjr178191.LService { <init>(...); }
+
+# view AndroidManifest.xml #generated:84
+-keep class com.xbjjupcqtl.hkxcebjbjr178191.VActivity { <init>(...); }
+
+# onClick res/layout/activity_main.xml #generated:35
+-keepclassmembers class * { *** changeToNightMode(...); }
+
+# onClick res/layout/row.xml #generated:53
+-keepclassmembers class * { *** onShareQuestion(...); }
+
+# onClick res/layout/row.xml #generated:41
+-keepclassmembers class * { *** onToggleStar(...); }
+
+# onClick res/layout/activity_main.xml #generated:48
+-keepclassmembers class * { *** searchQuestions(...); }
+
+# onClick res/layout/activity_main.xml #generated:22
+-keepclassmembers class * { *** showFavorite(...); }
+
+# onClick res/layout/row.xml #generated:28
+-keepclassmembers class * { *** showHideAnsOnClickHandler(...); }
+

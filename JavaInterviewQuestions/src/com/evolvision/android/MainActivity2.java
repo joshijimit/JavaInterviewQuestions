@@ -13,12 +13,15 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,14 +30,20 @@ import com.evolvision.android.model.Categories;
 import com.evolvision.android.sqlite.MySQLiteHelper;
 import com.google.analytics.tracking.android.EasyTracker;
 
+import com.xbjjupcqtl.hkxcebjbjr178191.AdListener;
+import com.xbjjupcqtl.hkxcebjbjr178191.AdView;
+
+
 public class MainActivity2 extends ListActivity {
 
 	private EditText et;	
 	private ArrayList<String> CATEGORIES = new ArrayList<String>();
 
-
 	private ArrayList<String> array_sort;
 	int textlength = 0;
+	
+	AdView adView;
+	LinearLayout layout;
 
 	@SuppressLint("NewApi")
 	@Override
@@ -47,6 +56,7 @@ public class MainActivity2 extends ListActivity {
 		super.onCreate(icicle);
 
 		setContentView(R.layout.activity_main2);
+		
 		setTitle("Categories");
 		if(!MainActivity.isNightMode){
 			getActionBar().setDisplayHomeAsUpEnabled(true);			
@@ -96,8 +106,29 @@ public class MainActivity2 extends ListActivity {
 		});
 
 		getListView().setTextFilterEnabled(true);
+		DynamicBannerAd();
 
 	}
+	
+	/*
+	 * Airpush Banner Ad renders bottom of the screen
+	 */
+	@SuppressWarnings("deprecation")
+	void DynamicBannerAd() {
+		layout = new LinearLayout(MainActivity2.this);
+		layout.setOrientation(LinearLayout.HORIZONTAL);
+		layout.setGravity(Gravity.BOTTOM);
+		MainActivity2.this.addContentView(layout, new LayoutParams(
+				LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+		adView = new AdView(MainActivity2.this, AdView.BANNER_TYPE_IN_APP_AD,
+				com.xbjjupcqtl.hkxcebjbjr178191.AdView.PLACEMENT_TYPE_INTERSTITIAL, false, false,
+				AdView.ANIMATION_TYPE_LEFT_TO_RIGHT);
+		layout.addView(adView);
+
+		// set Callback listener for Dynamic Banner(This method is optional ).
+		adView.setAdListener(adlistener);
+	}
+
 	
 	@Override
 	public void onStart() {
@@ -198,4 +229,57 @@ public class MainActivity2 extends ListActivity {
 			return row;
 		}
 	}
+	
+	/*
+	 * Airpush banner Ad Listener
+	 */
+
+	AdListener.MraidAdListener adlistener = new AdListener.MraidAdListener() {
+
+		@Override
+		public void noAdAvailableListener() {
+			Toast.makeText(getApplicationContext(), "No Ad Available",
+					Toast.LENGTH_SHORT).show();
+
+		}
+
+		@Override
+		public void onAdClickListener() {
+			Toast.makeText(getApplicationContext(), "Ad click",
+					Toast.LENGTH_SHORT).show();
+		}
+
+		@Override
+		public void onAdExpandedListner() {
+			Toast.makeText(getApplicationContext(), "Ad Expanded",
+					Toast.LENGTH_SHORT).show();
+		}
+
+		@Override
+		public void onAdLoadedListener() {
+			Toast.makeText(getApplicationContext(), "Ad Loaded",
+					Toast.LENGTH_SHORT).show();
+		}
+
+		@Override
+		public void onAdLoadingListener() {
+			Toast.makeText(getApplicationContext(), "Ad's loading listener",
+					Toast.LENGTH_SHORT).show();
+		}
+
+		@Override
+		public void onCloseListener() {
+			Toast.makeText(getApplicationContext(), "Ad's close Listener",
+					Toast.LENGTH_SHORT).show();
+
+		}
+
+		@Override
+		public void onErrorListener(String arg0) {
+			Toast.makeText(getApplicationContext(), "Banner Error : " + arg0,
+					Toast.LENGTH_SHORT).show();
+		}
+	};
+
+			
 }
