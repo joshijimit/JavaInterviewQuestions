@@ -1,3 +1,0 @@
-UPDATE answers SET answer = replace( answer , '\''', '''' ) WHERE answer LIKE '%\''%';
-UPDATE answers SET answer = replace( answer , '""', '"' ) WHERE answer LIKE '%""%';
-UPDATE answers SET answer = replace( answer , '\"', '"' ) WHERE answer LIKE '%\"%';
