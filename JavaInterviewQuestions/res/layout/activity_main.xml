@@ -27,7 +27,7 @@
         android:layout_alignLeft="@+id/searchQuestions"
         android:layout_alignRight="@+id/searchQuestions"
         android:layout_below="@+id/searchQuestions"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="10dp"
         android:onClick="showFavorite"
         android:text="My Favorites"
         android:textSize="20sp" />
@@ -40,7 +40,7 @@
         android:layout_alignLeft="@+id/searchQuestions"
         android:layout_alignRight="@+id/searchQuestions"
         android:layout_below="@+id/showFavorite"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="10dp"
         android:onClick="changeToNightMode"
         android:text="Turn night mode ON"
         android:textSize="20sp" />
@@ -53,7 +53,7 @@
         android:layout_alignLeft="@+id/button1"
         android:layout_alignRight="@+id/button1"
         android:layout_below="@+id/button1"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="10dp"
         android:onClick="searchQuestions"
         android:text="Search"
         android:textSize="20sp" />

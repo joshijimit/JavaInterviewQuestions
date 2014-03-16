@@ -6,10 +6,10 @@ import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ListActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -21,13 +21,13 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.evolvision.android.model.Categories;
 import com.evolvision.android.sqlite.MySQLiteHelper;
 import com.google.analytics.tracking.android.EasyTracker;
+import com.startapp.android.publish.StartAppAd;
 
-public class MainActivity2 extends ListActivity {
+public class MainActivity2 extends PreferenceActivity {
 
 	private EditText et;	
 	private ArrayList<String> CATEGORIES = new ArrayList<String>();
@@ -45,7 +45,7 @@ public class MainActivity2 extends ListActivity {
 		}
 		
 		super.onCreate(icicle);
-
+		StartAppAd.init(this, "101473701", "201025652");
 		setContentView(R.layout.activity_main2);
 		setTitle("Categories");
 		if(!MainActivity.isNightMode){

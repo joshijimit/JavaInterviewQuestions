@@ -17,7 +17,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.evolvision.android.model.CurrentRowHolder;
 import com.evolvision.android.model.Item;
@@ -203,7 +202,7 @@ public class MainActivity4 extends ListActivity {
 	}
 
 	private void AlterAdapter() {
-		if (et.getText().toString().isEmpty()) {
+		if (et.getText().toString().equals("")) {
 			array_sort.clear();			
 			adapter.notifyDataSetChanged();
 		} else {

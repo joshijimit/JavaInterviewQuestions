@@ -8,6 +8,7 @@ import android.annotation.SuppressLint;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,8 +24,9 @@ import com.evolvision.android.model.Questions;
 import com.evolvision.android.sqlite.MySQLiteHelper;
 import com.evolvision.android.utility.CommonFunctions;
 import com.google.analytics.tracking.android.EasyTracker;
+import com.startapp.android.publish.StartAppAd;
 
-public class MainActivity3 extends ListActivity {
+public class MainActivity3 extends PreferenceActivity {
 
 	private boolean isFromFavorite = false;
 	private int queFontSize = 20;
@@ -40,7 +42,8 @@ public class MainActivity3 extends ListActivity {
 		}
 		
 		super.onCreate(icicle);
-
+		StartAppAd.init(this, "101473701", "201025652");
+		setContentView(R.layout.activity_main3);
 		if(!MainActivity.isNightMode){
 			getActionBar().setDisplayHomeAsUpEnabled(true);			
 		}

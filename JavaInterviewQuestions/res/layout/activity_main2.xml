@@ -13,6 +13,7 @@
 	    android:id="@+id/android:list"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
+	    android:layout_above="@+id/startAppBanner2"
 	    android:layout_alignParentLeft="true"
 	    android:layout_below="@+id/editText1"
 	    android:cacheColorHint="#00000000" />
@@ -26,5 +27,12 @@
 	    android:ems="10"
 	    android:hint="Search Category" >
 	</EditText>
+	
+	 <com.startapp.android.publish.banner.Banner
+        android:id="@+id/startAppBanner2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" >
+    </com.startapp.android.publish.banner.Banner>
 	
 </RelativeLayout>   
