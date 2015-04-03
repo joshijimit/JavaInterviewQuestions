@@ -1,0 +1,770 @@
+insert into Answers values(535,535,'Ans. JSF stands for Java Server Faces. JSF has set of pre-assembled User Interface (UI). By this it means complex components are pre-coded and can be used with ease. It is event-driven programming model. By that it means that JSF has all necessary code for event handling and component organization. Application programmers can concentrate on application logic rather sending effort on these issues. It has component model that enables third-party components to be added like AJAX.',1);
+insert into Answers values(536,536,'Ans. Following things required for JSF:
+JDK (Java SE Development Kit)
+JSF 1.2
+Application Server (Tomcat or any standard application server)
+Integrated Development Environment (IDE) Ex. Netbeans 5.5, Eclipse 3.2.x, etc.
+Once JDK and Application Server is downloaded and configured, one can copy the JSF jar files to JSF project and could just start coding. :-) If IDE is used, it will make things very smooth and will save your time.',1);
+insert into Answers values(537,537,'Ans. JSF was developed using MVC (a.k.a Model View Controller) design pattern so that applications can be scaled better with greater maintainability. It is driven by Java Community Process (JCP) and has become a standard. The advantage of JSF is that it has both a Java Web user and interface and a framework that fits well with the MVC. It provides clean separation between presentation and behavior. UI (a.k.a User Interface) can be created by page author using reusable UI components and business logic part can be implemented using managed beans.',1);
+insert into Answers values(538,538,'Ans. JSF much more plumbing that JSP developers have to implement by hand, such as page navigation and validation. One can think of JSP and servlets as the assembly languages? under the hood of the high-level JSF framework.',1);
+insert into Answers values(539,539,'Ans. In an application add the JSF libraries. Further in the .jsp page one has to add the tag library like:
+
+<%@ taglib uri=""http://java.sun.com/jsf/core"" prefix=""f""%> <%@ taglib uri=""http://java.sun.com/jsf/html"" prefix=""h""%>
+
+Or one can try XML style as well:
+
+<?xml version=""1.0""?> <jsp:root version=""2.0"" xmlns:jsp=""http://java.sun.com/JSP/Page"" xmlns:f=""http://java.sun.com/jsf/core"" xmlns:h=""http://java.sun.com/jsf/html"">
+
+Once this is done, one can access the JSF components using the prefix attached. If working with an IDE (a.k.a Integrated Development Environment) one can easily add JSF but when working without them one also has to update/make the faces-config.xml and have to populate the file with classes i.e. Managed Beans between
+
+<faces-config> </faces-config> tags',1);
+insert into Answers values(540,540,'Ans. Navigation rules tells JSF implementation which page to send back to the browser after a form has been submitted. For ex. for a login page, after the login gets successful, it should go to Main page, else to return on the same login page, for that we have to code as:
+
+<navigation-rule>
+<from-view-id>/login.jsp</from-view-id>
+<navigation-case>
+<from-outcome>login</from-outcome>
+<to-view-id>/main.jsp<to-view-id>
+</navigation-case>
+<navigation-case>
+<from-outcome>fail</from-outcome>
+<to-view-id>/login.jsp<to-view-id>
+</navigation-case>
+</navigation-rule>
+
+from-outcome to be match with action attribute of the command button of the login.jsp as:
+
+<h:commandbutton value=""Login"" action=""login""/>
+Secondly, it should also match with the navigation rule in face-config.xml as
+
+
+<managed-bean>
+<managed-bean-name>user</managed-bean-name>
+<managed-bean-class>core.jsf.LoginBean</managed-bean-class>
+<managed-bean-scope>session</managed-bean-scope>
+</managed-bean>
+In the UI component, to be declared / used as:
+
+
+<h:inputText value=""#{user.name}""/>
+value attribute refers to name property of the user bean.',1);
+insert into Answers values(541,541,'Ans. The configuration file used is our old web.xml, if we use some IDE it will be pretty simple to generate but the contents will be something like below:
+
+
+<?xml version=""e;1.0""e; encoding=""e;UTF-8""e;?>
+<web-app version=""e;2.4""e; xmlns=""e;http://java.sun.com/xml/ns/j2ee""e;
+xmlns:xsi=""e;http://www.w3.org/2001/XMLSchema-instance""e;
+xsi:schemaLocation=""e;http://java.sun.com/xml/ns/j2ee
+http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd""e;>
+<context-param>
+<param-name>com.sun.faces.verifyObjects</param-name>
+<param-value>false</param-value>
+</context-param>
+
+
+<context-param>
+<param-name>com.sun.faces.validateXml</param-name>
+<param-value>true</param-value>
+</context-param>
+
+
+<context-param>
+<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+<param-value>client</param-value>
+</context-param>
+
+
+<servlet>
+<servlet-name>Faces Servlet</servlet-name>
+<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+<load-on-startup>1</load-on-startup>
+</servlet>
+
+
+<servlet-mapping>
+<servlet-name>Faces Servlet</servlet-name>
+<url-pattern>/faces/*</url-pattern>
+</servlet-mapping>
+
+
+<session-config>
+<session-timeout>
+30
+</session-timeout>
+</session-config>
+
+
+<welcome-file-list>
+<welcome-file>
+index.jsp
+</welcome-file>
+</welcome-file-list>
+</web-app>
+
+The unique thing about this file is ?servlet mapping?. JSF pages are processed by a servlet known to be part of JSF implementation code. In the example above, it has extension of .faces. It would be wrong to point your browser to http://localhost:8080/MyJSF/login.jsp, but it has to be http://localhost:8080/MyJSF/login.faces. If you want that your pages to be with .jsf, it can be done with small modification :-),
+
+<servlet-mapping>
+<servlet-name>Faces Servlet</servlet-name>
+<url-pattern>*.jsf</url-pattern>
+
+
+<servlet-mapping>',1);
+insert into Answers values(542,542,'Ans. The data that is manipulated in form or the other is done by model. The data presented to user in one form or the other is done by view. JSF is connects the view and the model. View can be depicted as shown by:
+
+
+<h:inputText value=""#{user.name}""/>
+JSF acts as controller by way of action processing done by the user or triggering of an event. For ex.
+
+<h:commandbutton value=""Login"" action=""login""/>
+this button event will triggered by the user on Button press, which will invoke the login Bean as stated in the faces-config.xml file. Hence, it could be summarized as below: User Button Click -> form submission to server ->; invocation of Bean class ->; result thrown by Bean class caught be navigation rule ->; navigation rule based on action directs to specific page.',1);
+insert into Answers values(543,543,'Ans. Every JSF page as described has various components made with the help of JSF library. JSF may contain h:form, h:inputText, h:commandButton, etc. Each of these are rendered (translated) to HTML output. This process is called encoding. The encoding procedure also assigns each component with a unique ID assigned by framework. The ID generated is random.',1);
+insert into Answers values(544,544,'Ans. JavaServer Faces (JSF) is a user interface (UI) framework for Java web applications. It is designed to significantly ease the burden of writing and maintaining applications that run on a Java application server and render their UIs back to a target client. JSF provides ease-of-use in the following ways:
+
+Makes it easy to construct a UI from a set of reusable UI components
+Simplifies migration of application data to and from the UI
+Helps manage UI state across server requests
+Provides a simple model for wiring client-generated events to server-side application code
+Allows custom UI components to be easily built and re-used
+
+
+Most importantly, JSF establishes standards which are designed to be leveraged by tools to provide a developer experience which is accessible to a wide variety of developer types, ranging from corporate developers to systems programmers. A ""corporate developer"" is characterized as an individual who is proficient in writing procedural code and business logic, but is not necessarily skilled in object-oriented programming. A ""systems programmer"" understands object-oriented fundamentals, including abstraction and designing for re-use. A corporate developer typically relies on tools for development, while a system programmer may define his or her tool as a text editor for writing code. Therefore, JSF is designed to be tooled, but also exposes the framework and programming model as APIs so that it can be used outside of tools, as is sometimes required by systems programmers.',1);
+insert into Answers values(545,545,'Ans. if you have the following URL: http://your_server/your_app/product.jsf?id=777, you access the passing parameter id with the following lines of java code:
+
+FacesContext fc = FacesContext.getCurrentInstance();
+String id = (String) fc.getExternalContext().getRequestParameterMap().get(""id"");
+From the page, you can access the same parameter using the predefined variable with name param. For example,
+
+<h:outputText value=""#{param[''id'']}"" />
+Note: You have to call the jsf page directly and using the servlet mapping.',1);
+insert into Answers values(546,546,'Ans. Current JSF implementation does not add the context path for outputLink if the defined path starts with ''/''. To correct this problem use #{facesContext.externalContext.requestContextPath} prefix at the beginning of the outputLink value attribute. For For Example:
+<h:outputLink value=”#{facesContext.externalContext.requestContextPath}/myPage.faces”>',1);
+insert into Answers values(547,547,'Ans. You can get a reference to the HTTP request object via FacesContext like this:
+
+FacesContext fc = FacesContext.getCurrentInstance();
+HttpServletRequest request = (HttpServletRequest) fc.getExternalContext().getRequest();
+
+and then use the normal request methods to obtain path information. Alternatively,
+
+context.getViewRoot().getViewId();
+will return you the name of the current JSP (JSF view IDs are basically just JSP path names).',1);
+insert into Answers values(548,548,'Ans. You can get it using externalContext getInitParameter method. For example, if you have:
+
+<context-param>
+<param-name>connectionString</param-name>
+<param-value>jdbc:oracle:thin:scott/tiger@cartman:1521:O901DB</param-value>
+</context-param>
+You can access this connection string with:
+
+FacesContext fc = FacesContext.getCurrentInstance();
+String connection = fc.getExternalContext().getInitParameter(""connectionString"");',1);
+insert into Answers values(549,549,'Ans. You can get it using initParam pre-defined JSF EL valiable.
+
+For example, if you have:
+
+<context-param>
+<param-name>productId</param-name>
+<param-value>2004Q4</param-value>
+</context-param>
+You can access this parameter with #{initParam[''productId'']} . For example:
+
+Product Id: <h:outputText value=""#{initParam[''productId'']}""/>',1);
+insert into Answers values(550,550,'Ans. In order to terminate the session you can use session invalidate method.
+
+This is an example how to terminate the session from the action method of a backing bean:
+
+public String logout() {
+FacesContext fc = FacesContext.getCurrentInstance();
+HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+session.invalidate();
+return ""login_page"";
+}
+The following code snippet allows to terminate the session from the jsp page:
+
+<% session.invalidate(); %>
+Is it helpful? Yes No Add Comment View Comments
+Ques 17. How to reload the page after ValueChangeListener is invoked?
+Ans. At the end of the ValueChangeListener, call FacesContext.getCurrentInstance().renderResponse()
+Is it helpful? Yes No Add Comment View Comments
+Ques 18. How to download PDF file with JSF?
+Ans. This is an code example how it can be done with action listener of the backing bean.
+
+Add the following method to the backing bean:
+
+
+public void viewPdf(ActionEvent event) {
+String filename = ""filename.pdf"";
+
+// use your own method that reads file to the byte array
+byte[] pdf = getTheContentOfTheFile(filename);
+
+FacesContext faces = FacesContext.getCurrentInstance();
+HttpServletResponse response = (HttpServletResponse) faces.getExternalContext().getResponse();
+
+response.setContentType(""application/pdf"");
+response.setContentLength(pdf.length);
+response.setHeader( ""Content-disposition"", ""inline; filename=\""""+fileName+""\"""");
+try {
+ServletOutputStream out;
+out = response.getOutputStream();
+out.write(pdf);
+} catch (IOException e) {
+e.printStackTrace();
+}
+faces.responseComplete();
+}
+This is a jsp file snippet:
+
+<h:commandButton immediate=""true"" actionListener=""#{backingBean.viewPdf}"" value=""Read PDF"" />
+Is it helpful? Yes No Add Comment View Comments
+Ques 19. How to show Confirmation Dialog when user Click the Command Link?
+Ans. ah:commandLink assign the onclick attribute for internal use. So, you cannot use it to write your own code. This problem will fixed in the JSF 1.2. For the current JSF version you can use onmousedown event that occurs before onclick.
+<script language=""javascript"">
+function ConfirmDelete(link) {
+var delete = confirm(''Do you want to Delete?'');
+if (delete == true) {
+link.onclick();
+}
+}
+</script>
+
+. . . . <h:commandLink action=""delete"" onmousedown=""return ConfirmDelete(this);"">
+<h:outputText value=""delete it""/> </h:commandLink>
+Is it helpful? Yes No Add Comment View Comments
+Ques 20. What is the different between getRequestParameterMap() and getRequestParameterValuesMap()
+Ans. getRequestParameterValuesMap() similar to getRequestParameterMap(), but contains multiple values for for the parameters with the same name. It is important if you one of the components such as <h:selectMany>.
+Is it helpful? Yes No Add Comment View Comments
+12345
+Most helpful rated by users:
+What is JSF?
+What is required for JSF to get started?
+What is JSF architecture?
+How the components of JSF are rendered? An Example
+How to pass a parameter to the JSF application using the URL string?',1);
+insert into Answers values(551,551,'Ans. At the end of the ValueChangeListener, call FacesContext.getCurrentInstance().renderResponse()',1);
+insert into Answers values(552,552,'Ans. This is an code example how it can be done with action listener of the backing bean.
+
+Add the following method to the backing bean:
+
+
+public void viewPdf(ActionEvent event) {
+String filename = ""filename.pdf"";
+
+// use your own method that reads file to the byte array
+byte[] pdf = getTheContentOfTheFile(filename);
+
+FacesContext faces = FacesContext.getCurrentInstance();
+HttpServletResponse response = (HttpServletResponse) faces.getExternalContext().getResponse();
+
+response.setContentType(""application/pdf"");
+response.setContentLength(pdf.length);
+response.setHeader( ""Content-disposition"", ""inline; filename=\""""+fileName+""\"""");
+try {
+ServletOutputStream out;
+out = response.getOutputStream();
+out.write(pdf);
+} catch (IOException e) {
+e.printStackTrace();
+}
+faces.responseComplete();
+}
+This is a jsp file snippet:
+
+<h:commandButton immediate=""true"" actionListener=""#{backingBean.viewPdf}"" value=""Read PDF"" />',1);
+insert into Answers values(553,553,'Ans. ah:commandLink assign the onclick attribute for internal use. So, you cannot use it to write your own code. This problem will fixed in the JSF 1.2. For the current JSF version you can use onmousedown event that occurs before onclick.
+<script language=""javascript"">
+function ConfirmDelete(link) {
+var delete = confirm(''Do you want to Delete?'');
+if (delete == true) {
+link.onclick();
+}
+}
+</script>
+
+. . . . <h:commandLink action=""delete"" onmousedown=""return ConfirmDelete(this);"">
+<h:outputText value=""delete it""/> </h:commandLink>',1);
+insert into Answers values(554,554,'Ans. getRequestParameterValuesMap() similar to getRequestParameterMap(), but contains multiple values for for the parameters with the same name. It is important if you one of the components such as <h:selectMany>.',1);
+insert into Answers values(555,555,'Ans. Yes. You can define the list of the configuration files in the web.xml.
+
+This is an example:
+
+<context-param>
+<param-name>javax.faces.CONFIG_FILES</param-name>
+<param-value>/WEB-INF/faces-config-navigation.xml,/WEB-INF/faces-beans.xml</param-value>
+</context-param>
+Note: Do not register /WEB-INF/faces-config.xml file in the web.xml . Otherwise, the JSF implementation will process it twice.
+
+Hi there, I guess the Note: column should have been meant or intended for ""faces-config.xml"" file as thats the default configuration file for JSF (which is similar to struts-config.xml for Struts!!). faces-context.xml file sounds like the user defined config file similar to the aforementioned two xml files.',1);
+insert into Answers values(556,556,'Ans. The h:outputText has attribute escape that allows to escape the html markup. By default, it equals to ""true"". It means all the special symbols will be replaced with ''&'' codes. If you set it to ""false"", the text will be printed out without ecsaping.
+
+For example, <h:outputText value=""<b>This is a text</b>""/>
+
+will be printed out like:
+
+<b>This is a text</b>
+
+In case of <h:outputText escape=""false"" value=""<b>This is a text</b>""/>
+
+you will get:
+
+This is a text',1);
+insert into Answers values(557,557,'Ans. Set redisplay=true, it is false by default.',1);
+insert into Answers values(558,558,'Ans. The life cycle of a JavaServer Faces page is similar to that of a JSP page: The client makes an HTTP request for the page, and the server responds with the page translated to HTML. However, because of the extra features that JavaServer Faces technology offers, the life cycle provides some additional services to process a page.
+JSF application lifecycle consist of six phases which are as follows
+Restore view phase
+Apply request values phase; process events
+Process validations phase; process events
+Update model values phase; process events
+Invoke application phase; process events
+Render response phase
+Restore View Phase:
+When a request for a JavaServer Faces page is made, such as when a link or a button is clicked, the JavaServer Faces implementation begins the restore view phase.
+Apply Request Values Phase:
+After the component tree is restored, each component in the tree extracts its new value from the request parameters by using its decode method. The value is then stored locally on the component. If the conversion of the value fails, an error message associated with the component is generated and queued on FacesContext. This message will be displayed during the render response phase, along with any validation errors resulting from the process validations phase.
+Process Validations Phase:
+During this phase, the JavaServer Faces implementation processes all validators registered on the components in the tree. It examines the component attributes that specify the rules for the validation and compares these rules to the local value stored for the component.
+Update Model Values Phase:
+After the JavaServer Faces implementation determines that the data is valid, it can walk the component tree and set the corresponding server-side object properties to the components'' local values. The JavaServer Faces implementation will update only the bean properties pointed at by an input component''s value attribute. If the local data cannot be converted to the types specified by the bean properties, the life cycle advances directly to the render response phase so that the page is rerendered with errors displayed. This is similar to what happens with validation errors.
+Invoke Application Phase:
+During this phase, the JavaServer Faces implementation handles any application-level events, such as submitting a form or linking to another page.
+Render Response Phase:
+During this phase, the JavaServer Faces implementation delegates authority for rendering the page to the JSP container if the application is using JSP pages. If this is an initial request, the components represented on the page will be added to the component tree as the JSP container executes the page. If this is not an initial request, the components are already added to the tree so they needn''t be added again. In either case, the components will render themselves as the JSP container traverses the tags in the page.',1);
+insert into Answers values(559,559,'Ans. RichFaces is a JSF component library that consists of two main parts: AJAX enabled JSF components and the CDK (Component Development Kit). RichFaces UI components are   divided into two tag libraries a4j: and rich:. Both tag libraries offer out-of-the-box AJAX enabled JSF components. The CDK is a facility for creating, generating and testing you own rich JSF components.
+A full set of AJAX enabled components in two libraries
+a4j: page centric AJAX controls
+rich: self contained, ready to use components
+Client-side validation, expanding JSR 303 Bean Validation all the way to the browser.
+Advanced queueing to match the high performance requirements of real world enterprise applications.
+Push component upgrades including JavaMessaging Service (JMS) integrations, and various transport mechanisms based on browser support.
+Our own Component Development Kit (CDK).
+Comprehensive documentation covering development best practices, and component details.
+Detailed and automated testing facilities for components, actions, listeners, and pages.
+Broad cross-browser support
+Large and active community at its foundation!!',1);
+insert into Answers values(560,560,'Ans. Sends an AJAX request based on a DHTML event supported by the parent component.  In this example, the AJAX request will  be triggered after the user types a character in the text box:
+<h:inputText value=""#{document.docOrigtor}"" id=""docClaimOrigId"" binding=""#{handler.docOrig}"">
+  <a4j:support actionListener=""#{handler.createDocumentName}"" event=""onkeyup"" reRender=""docId""/>
+</h:inputText>
+Here, on keyup event it will call handler.createDocumentName method with ajax call and rendering docId value.',1);
+insert into Answers values(561,561,'Ans.
+Configuration of web.xml while you are using RichFaces in your application:
+
+    <context-param>
+      <param-name>org.richfaces.CONTROL_SKINNING</param-name>
+      <param-value>enable</param-value>
+    </context-param>
+    <context-param>
+        <param-name>org.richfaces.LoadStyleStrategy</param-name>
+        <param-value>ALL</param-value>
+    </context-param>
+    <context-param>
+        <param-name>org.richfaces.LoadScriptStrategy</param-name>
+        <param-value>ALL</param-value>
+    </context-param>
+    <filter>
+        <display-name>RichFaces Filter</display-name>
+        <filter-name>richfaces</filter-name>
+        <filter-class>org.ajax4jsf.Filter</filter-class>
+        <init-param>
+            <param-name>maxRequestSize</param-name>
+            <param-value>999999999</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>richfaces</filter-name>
+        <servlet-name>Faces Servlet</servlet-name>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+    </filter-mapping>',1);
+insert into Answers values(562,562,'Ans.
+Controlling traffic can be done using Queues mechanism.
+Queues can be defined using <a4j:queue…../>
+3 types of queues are there: Named, Unnamed, and Global queue.',1);
+insert into Answers values(563,563,'Ans.  The bean class should be implemented by Serializable.',1);
+insert into Answers values(564,564,'Ans.
+We can define an applications skin with EL expression like this:
+Deine a session scoped skinBean and manage its currentSkin  property at runtime with your skin names values.  Every time a page is rendered, RichFaces will resolve the value in #{skinBean.currentSkin} to get the current skin.  Changing Skins should not be done via AJAX but with a full page refresh. A full page refresh will ensure that all CSS links are correctly updated based on the new skin.',1);
+insert into Answers values(565,565,'Ans. "ajaxRendered"  attribute of the  <a4j:outputPanel>  set to "true" allows to define the area of the page that will be re-rendered even if it is not pointed in the reRender attribute explicitly. It might be useful if you have an area on a page that should be updated as a response on any Ajax request.',1);
+insert into Answers values(566,566,'Ans.
+""limitToList""  attribute allows to dismiss the behavior of the  <a4j:outputPanel>   ""ajaxRendered"" attribute.
+limitToList = ""true"" means to update only the area(s) that mentioned in the ""reRender""  attribute explicitly. All output panels with ajaxRendered=""true"" is ignored.',1);
+insert into Answers values(567,567,'Ans.
+Some components of RichFaces:
+<rich:panel>
+<rich:dataTable>
+<rich:toolTip>
+<rich:modalPanel>
+<rich:separator>
+<rich:spacer>
+<rich:togglePanel>
+<rich:tabPanel>
+<rich:collapsiblePanel>
+<rich:tooltip>
+<rich:fileUpload>
+<rich:calendar>
+<rich:select>
+<rich:tree>',1);
+insert into Answers values(568,568,'Ans. Some examples of a4j components:
+<a4j:commandLink>
+<a4j:commandButton>
+<a4j:outputPanel>
+<a4j:region>
+<a4j:mediaOutput>
+<a4j:queue>',1);
+insert into Answers values(569,569,'Ans.
+Attribute ""eventsQueue"" defines the name of the queue that will be used to order upcoming Ajax requests. By default, RichFaces does not queue Ajax requests. If events are produced simultaneously, they will come to the server simultaneously. JSF implementations (especially, the very first ones) does not guaranty that the request that comes first will be served or passed into the JSF lifecycle first. The order how the server-side data will be modified in case of simultaneous request might be unpredictable. Usage of eventsQueue attribute allows to avoid possible mess.
+The next request posted in the same queue will wait until the previos one is not processed and Ajax Response is returned back if the  ""eventsQueue""  attribute is defined.
+In addition, RichFaces starts to remove from the queue ""similar"" requests. ""Similar''""requests are the requests produced by the same event.',1);
+insert into Answers values(570,570,'Ans. See the example to pass parameters to a4j command button:
+<a4j:commandButton ajaxSingle=""true"" value=""Update"" reRender=""name, job,
+            out""  status=""commonstatus"">
+            <a4j:actionparam name=""n"" value=""Mark Joe""  assignTo=""#{userBean.name}"" />
+            <a4j:actionparam name=""j"" value=""evolvision""  assignTo=""#{userBean.job}"" />
+</a4j:commandButton>
+a4j:actionparam is the name by which you can get the value in your Handler/Bean.',1);
+insert into Answers values(571,571,'Ans.
+There are different ways to send Ajax requests from your JSF page. For example you can use <a4j:commandButton>  ,  <a4j:commandLink> ,  <a4j:poll>   or  <a4j:support>  tags or any other.
+All these tags hide the usual JavaScript activities that are required for an  XMHTTPRequest object building and an Ajax request sending. Also, they allow you to decide which components of your JSF page are to be re-rendered as a result of the Ajax response (you can list the IDs of these components in the  ""reRender""  attribute).',1);
+insert into Answers values(572,572,'Ans.
+Given an example below:
+A4J.AJAX.onError = function(req, status, message){
+    window.alert(""Custom onError handler ""+message);
+}
+A4J.AJAX.onExpired = function(loc, expiredMsg){
+if(window.confirm(""Custom onExpired handler ""+expiredMsg+"" for a location: ""+loc)){
+      return loc;
+    } else {
+     return false;
+    }
+}',1);
+insert into Answers values(573,573,'Ans. Using rich:fileUplaod.
+rich:fileUpload is a component which provides files upload functionality and extends functionality of standard input with type=file.
+We can have different characteristics with this component like: allowed file types, maximum files quantity, and immediate upload.
+It supports immediate upload as soon as a file is selected with this component.
+<rich:fileUpload  id=""fileUploadId""
+   autoclear=""true""
+   uploadListClass=""uploadList""
+   fileEntryClass=""fileEntry""
+   allowFlash=""auto""
+   styleClass=""richFileUpload""
+   fileUploadListener=""#{handler.documentUpload}""
+   maxFilesQuantity=""#{constants.FILE_UPLOADLIMIT}""
+   required=""true""
+   immediate=""true""
+   listHeight=""1px""
+   listWidth=""71px""
+   onupload=""onFileUploadClick();""
+   addControlLabel=""#{constants.Label_Browse}""
+   immediateUpload=""true""
+   noDuplicate=""true""
+   onadd=""addFileListener(event)"">
+ <a4j:support event=""onuploadcomplete"" immediate=""true"" reRender=""hiddenVal,docTableId,uploadErrorGrid,docSelectedMsgID,exceptionMessageGrid""/>
+</rich:fileUpload>',1);
+insert into Answers values(574,574,'Ans. a4j:ajax is one of our core behaviors, extending the base JSF 2.0 f:ajax tag. This tag triggers an Ajax request when the specified parent event is triggered.
+<h:inputText value=""#{userBean.name}"">
+    <a4j:ajax event=""keyup"" render=""out"" />
+</h:inputText>
+<h:outputText value=""#{userBean.name}"" id=""out"" />',1);
+insert into Answers values(575,575,'Ans. The a4j:commandLink combines the standard h:commandLink with our own a4j:ajax. This not only reduces typing, but also inherits all a4j:ajax special options.
+<a4j:commandLink value=""#{constants.Label_DateUploaded}"" action=""#{handler.tableHeaderListener}"" ajaxSingle=""true"" reRender=""claimDocTable"" onclick=""loadClaimDocs()"" styleClass=""tableHeaderTxt"" oncomplete=""completeClaimRender()"">
+       <f:setPropertyActionListener target=""#{handler.sortField}"" value=""#{constants.Label_DateUploaded}""/>                                            
+ </a4j:commandLink>',1);
+insert into Answers values(576,576,'Ans.
+Use a4j:actionListener to register an ActionListener class on a parent action component. Multiple listener methods can be registered on an action components in this way.
+The a4j:actionListener tag differs from the standard JSF tag in that it allows the listener to be attached in any of three ways:
+By listener method, using the listener attribute.
+By listener class, using the type attribute.
+By object binding, using the binding attribute.
+<h:commandButton value=""Update"">
+    <a4j:actionListener listener=""#{bean.actionMethod}""/>
+    <f:ajax render=""messages""/>
+</h:commandButton>',1);
+insert into Answers values(577,577,'Ans.
+The a4j:jsFunction component creates a JavaScript function that allows you to send JSF Ajax requests from any JavaScript. You define the Ajax and JSF properties just like a4j:ajax, or a4j:commandButton, and a4j:jsFunction creates the JavaScript for you. The component sends a request using the standard JSF mechanisms. Note that this means a JSF form is required.
+The following example shows how to use a4j:jsFunction to create a function named updateName. This is then called on mouseover of the different names. This triggers the full round trip Ajax request and renders the updated name.
+  <span onmouseover=""updateAddress(''evolvision'')"" onmouseout=""updateAddress('''')"">evolvision</span>
+<a4j:jsFunction name=""updateAddress"" render=""showAddress"">
+    <a4j:param name=""address"" assignTo=""#{bean.address}"" />
+</a4j:jsFunction>',1);
+insert into Answers values(578,578,'Ans.
+The a4j:param component extends the regular f:param tag. The primary extension is the ability to assign a value to a property on a managed bean directly using the assignTo attribute. Using this feature you can update model values without invoking a single line code.
+
+<a4j:commandButton value=""Update Name"" render=""rep"">
+    <a4j:param value=""evolvision"" assignTo=""#{bean.name}"" />
+</a4j:commandButton>',1);
+insert into Answers values(579,579,'Ans. The a4j:status component is an indicator of an Ajax request. It has two states: start and stop. The start state indicates that an Ajax request is in progress. When an Ajax Response is returned, the component switches to the stop state. Give a loading progress on a ajax call:
+
+<rich:modalPanel id=""statusModalPanelId"" autosized=""true"" resizeable=""false"">
+        <h:graphicImage  value=""/views/images/loading.gif""/>
+        <a4j:status id=""statusId"" onstop=""Richfaces.hideModalPanel(''statusModalPanelId'');"">
+                <f:facet name=""start""></f:facet>
+        </a4j:status>
+ </rich:modalPanel>',1);
+insert into Answers values(580,580,'Ans. rich:messages is an extension for a standard h:messages component. In addition to what the standard component provides, rich:messages:
+
+<rich:messages ajaxRendered=""true"" />',1);
+insert into Answers values(581,581,'Ans. The rich:dataGrid component accepts the same data sources as other iteration components and renders them in a grid format, the same way as the h:PanelGrid component does for in-line data. To define the grid''s properties and styles, use the same definitions as for the h:panelGrid component.
+
+<rich:dataGrid value=""#{bean.allEmployees}"" var=""emp"" columns=""3"" elements=""9"" width=""600px"" border=""0"">
+      <rich:panel bodyClass=""pbody"">
+         <f:facet name=""header"">
+               <h:outputText value=""#{emp.name} #{emp.code}""></h:outputText>
+          </f:facet>
+          <h:panelGrid columns=""2"">
+               <h:outputText value=""Salary:"" styleClass=""label""></h:outputText>
+    Is it helpful?
+    Yes
+    No
+   
+   
+    Add Comment
+    View Comments 
+   
+   
+Ques 24. What is rich:tree in RichFaces?
+Ans.
+The rich:tree component renders a tree control on the page. The most important tree features include the following:
+Native support for Ajax operations
+Support for ajax, client, and server switch types
+Selection capabilities
+Flexible look and feel
+<rich:tree id=""tree"" nodeType=""#{node.type}"" var=""node"" value=""#{bean.rootNodes}"" toggleType=""client"" selectionType=""ajax"" selectionChangeListener=""#{bean.selectionChanged}"">
+      <rich:treeNode type=""country"">#{node.name}</rich:treeNode>
+      <rich:treeNode type=""company"" iconExpanded=""/images/ctry.gif"" iconCollapsed=""/images/tree/disc.gif"">#{node.name}</rich:treeNode>
+      <rich:treeNode type=""cd"" iconLeaf=""/images/tree/cd.gif"">
+           #{node.artist} - #{node.name} - #{node.year}
+      </rich:treeNode>
+    Is it helpful?
+    Yes
+    No
+   
+   
+    Add Comment
+    View Comments 
+   
+   
+Ques 25. What is rich:tooltip in RichFaces?
+Ans. The rich:tooltip component creates a small non-modal pop-up that can be used to display additional information for nearly anything on the page.
+
+<rich:toolTip id=""ttBtnUploadSelectedDoc"" for=""helpBtnUploadSelectedDocID"" layout=""block"">
+        <h:outputLabel styleClass=""tooltipSpan"">Use this to upload the documents selected for upload and their document properties to the document repository.<p>Shortcut: CTRL+SHIFT+U</p></h:outputLabel>
+</rich:toolTip>
+Is it helpful? Yes No Add Comment View Comments
+123456
+Most helpful rated by users:
+What is rich:dataGrid in RichFaces?
+What is RichFaces?
+About Us Privacy Policy Terms of Use Contact Us Google+
+©2014 evolvision',1);
+insert into Answers values(582,582,'Ans.
+The rich:tree component renders a tree control on the page. The most important tree features include the following:
+Native support for Ajax operations
+Support for ajax, client, and server switch types
+Selection capabilities
+Flexible look and feel
+<rich:tree id=""tree"" nodeType=""#{node.type}"" var=""node"" value=""#{bean.rootNodes}"" toggleType=""client"" selectionType=""ajax"" selectionChangeListener=""#{bean.selectionChanged}"">
+      <rich:treeNode type=""country"">#{node.name}</rich:treeNode>
+      <rich:treeNode type=""company"" iconExpanded=""/images/ctry.gif"" iconCollapsed=""/images/tree/disc.gif"">#{node.name}</rich:treeNode>
+      <rich:treeNode type=""cd"" iconLeaf=""/images/tree/cd.gif"">
+           #{node.artist} - #{node.name} - #{node.year}
+      </rich:treeNode>
+    Is it helpful?
+    Yes
+    No
+   
+   
+    Add Comment
+    View Comments 
+   
+   
+Ques 25. What is rich:tooltip in RichFaces?
+Ans. The rich:tooltip component creates a small non-modal pop-up that can be used to display additional information for nearly anything on the page.
+
+<rich:toolTip id=""ttBtnUploadSelectedDoc"" for=""helpBtnUploadSelectedDocID"" layout=""block"">
+        <h:outputLabel styleClass=""tooltipSpan"">Use this to upload the documents selected for upload and their document properties to the document repository.<p>Shortcut: CTRL+SHIFT+U</p></h:outputLabel>
+</rich:toolTip>
+Is it helpful? Yes No Add Comment View Comments
+123456
+Most helpful rated by users:
+What is rich:dataGrid in RichFaces?
+What is RichFaces?
+About Us Privacy Policy Terms of Use Contact Us Google+
+©2014 evolvision',1);
+insert into Answers values(583,583,'Ans. The rich:tooltip component creates a small non-modal pop-up that can be used to display additional information for nearly anything on the page.
+
+<rich:toolTip id=""ttBtnUploadSelectedDoc"" for=""helpBtnUploadSelectedDocID"" layout=""block"">
+        <h:outputLabel styleClass=""tooltipSpan"">Use this to upload the documents selected for upload and their document properties to the document repository.<p>Shortcut: CTRL+SHIFT+U</p></h:outputLabel>
+</rich:toolTip>',1);
+insert into Answers values(584,584,'Ans. The rich:calendar component allows you to select a date using a monthly calendar widget. It is possible to use the component in a popup or inline mode. In popup mode the calendar is initially rendered as an input for date with a button on the right side to trigger the popup. For inline mode, the monthly calendar is rendered on the page initially.
+
+<rich:calendar value=""#{calendarBean.dateSelected}"" id=""calendar"" locale=""#{calendarBean.locale}"" popup=""#{calendarBean.popup}"" datePattern=""#{calendarBean.pattern}"" showApplyButton=""#{calendarBean.showApply}"" cellWidth=""24px"" cellHeight=""22px"" style=""width:200px"" disabled=""#{calendarBean.disabled}"">
+</rich:calendar>',1);
+insert into Answers values(585,585,'Ans. JUnit is a software testing framework for unit testing, open Source Software maintained by the JUnit.org community. JUnit was originally written by Erich Gamma and Kent Beck.
+
+? Test runners for running tests
+? Test fixtures for sharing common test data
+? Assertions for testing expected results',1);
+insert into Answers values(586,586,'Ans. JUnit is mostly used by developers for testing their written code. JUnit is designed for unit testing, which is really a coding process, not a testing process. But many testers or QA engineers, are also required to use JUnit for unit testing.',1);
+insert into Answers values(587,587,'Ans. ? Using JUnit makes unit testing easier and faster.
+? Writing more tests will make more productive, not less productive.
+? Unit Tests should be done as soon as possible at the code unit level so at that point we capture the issue and fix it.',1);
+insert into Answers values(588,588,'Ans. As JUnit code is written in java, compiling a JUnit test class is like compiling any other Java classes. The only thing you need watch out is that the JUnit JAR file must be included in the classpath like junit.jar etc. For example, to compile the test class LoginTest.java described previously, you should do this:
+
+javac -cp junit-4.4.jar LoginTest.java
+
+and it will create .class file.
+LoginTest.class
+
+The compilation is ok, if you see the LoginTest.class file.',1);
+insert into Answers values(589,589,'Ans. You should be able to write this simple test class with one test method:
+
+
+import org.junit.*;
+
+public class LoginTest
+
+{
+
+@Test public void testLogin()
+
+{
+
+String username = \\\""evolvision\\\"";
+
+Assert.assertEquals(\\\""evolvision\\\"", username);
+
+}
+
+}
+
+
+Here first argument in assertEquals is the known parameter which should be equal to username. If both are same it will send me true and if both are not equal sends me false.',1);
+insert into Answers values(590,590,'Ans. A JUnit test class usually contains a number of test methods. You can run all test methods in a JUnit test class with the JUnitCore runner class. For example, to run the test class LoginTest.java described previously, you should do this:
+
+java -cp .;
+junit-4.4.jar org.junit.runner.JUnitCore LoginTest
+
+JUnit version 4.4
+Time: 0.015
+OK (1 test)
+
+This output says that 1 tests performed and passed. The same you can perform by executing build.xml also.',1);
+insert into Answers values(591,591,'Ans. You run your JUnit tests from a command line, from an IDE, or from \""ant\"", you must define your CLASSPATH settings correctly. Here is what recommended by the JUnit FAQ with some minor changes:
+
+To run your JUnit tests, you\''ll need the following elemements in your CLASSPATH:
+
+* The JUnit JAR file should be there.
+* Location of your JUnit test classes.
+* Location of classes to be tested.
+* JAR files of class libraries that are required by classes to be tested.
+
+If found NoClassDefFoundError in your test results, then something is missing from your CLASSPATH.
+
+If you are running your JUnit tests from a command line on a Windows system:
+
+set CLASSPATH=c:\\A\\junit-4.4.jar;c:\\B\\test_classes;
+c:\\B\\target_classes;
+
+If you are running your JUnit tests from a command line on a Unix (bash) system:
+
+export CLASSPATH=/A/junit-4.4.jar:/B/test_classes:
+/C/target_classes:',1);
+insert into Answers values(592,592,'Ans. You need to check the following list to run JUnit tests from a command window:
+
+1. Make sure that JDK is installed and the \""java\"" command program is accessible through the PATH setting. Type \""java -version\"" at the command prompt, you should see the JVM reports you back the version string.
+2. Make sure that the CLASSPATH is defined as shown in the previous question.
+3. Invoke the JUnit runner by entering the following command:
+
+java org.junit.runner.JUnitCore',1);
+insert into Answers values(593,593,'Ans. * You need to mark the method as a JUnit test method with the JUnit annotation: @org.junit.Test.
+* A JUnit test method must be a \""public\"" method. This allows the runner class to access this method.
+* A JUnit test method must be a \""void\"" method. The runner class does not check any return values.
+* A JUnit test should perform one JUnit assertion - calling an org.junit.Assert.assertXXX() method.
+
+Here is a simple JUnit test method:
+
+import org.junit.*;
+@Test public void testLogin() {
+String username = \""evolvision\"";
+Assert.assertEquals(\""evolvision\"", username);
+}',1);
+insert into Answers values(594,594,'Ans. * Automated unit testing requires extra time to setup initially. But it will save your time, if your code requires changes many times in the future.
+* A debugger is designed for manual debugging and manual unit testing, not for automated unit testing. JUnit is designed for automated unit testing.',1);
+insert into Answers values(595,595,'Ans. You can write a main() method in each class that needs to be tested for unit testing. In the main() method, you could create test object of the class itself, and write some tests to test its methods. However, this is not a recommended approach because of the following points:
+
+* Your classes will be cluttered with test code in main method. All those test codes will be packaged into the final product.
+* If you have a lots of classes to test, you need to run the main() method of every class. This requires some extra coding effort.
+* If you want the test results to be displayed in a GUI, you will have to write code for that GUI.
+* If you want to log the results of tests in HTML format or text format, you will have to write additional code.
+* If one method call fails, next method calls won\''t be executed. You will have to work-around this.',1);
+insert into Answers values(596,596,'Ans. If we add debug statements into code, it is a low-tech method for debugging it. It usually requires that output be scanned manually every time the program is run to ensure that the code is doing what\''s expected.
+
+It generally takes less time in the long run to codify expectations in the form of an automated JUnit test that retains its value over time. If it\''s difficult to write a test to assert expectations, the tests may be telling you that shorter and more cohesive methods would improve your design.',1);
+insert into Answers values(597,597,'Ans. We should test to target areas that might break. set() and get() methods on simple data types are unlikely to break. So no need to test them.
+
+set() and get() methods on complex data types are likely to break. So you should test them.',1);
+insert into Answers values(598,598,'Ans. This is an interesting question.
+
+The technical answer is no. There is no need to write one test class for each every class that need to be tested. One test class can contain many tests for many test target classes.
+
+But the practical answer is yes. You should design one test class per test target class for low level basic tests. This makes your test classes much easier to manage and maintain. You should write separate test classes for high level tests that requires multiple target classes working together.',1);
+insert into Answers values(599,599,'Ans. Test case class contains a setUp() method, a tearDown() method and multiple testXXX() methods. When calling a test runner to run this test class, the runner will execute those methods in a specific order giving the test case class an execution life cycle like this:
+
+setUp()
+
+testXXX1()
+
+tearDown()
+
+setUp()
+
+testXXX2()
+
+tearDown()',1);
+insert into Answers values(600,600,'Ans. A JUnit 4.4 test class contains a @Before method, an @After method and multiple @test methods. When calling a test runner to run this test class, the runner will execute those methods in a specific order giving the test class an execution life cycle like this:
+
+@Before
+@Test XXX1
+@After
+
+@Before
+@Test XXX2
+@After',1);
+insert into Answers values(601,601,'Ans. When a method is declared as \""private\"", it can only be accessed within the same class. So there is no way to test a \""private\"" method of a target class from any test class.
+
+To resolve this problem, you have to perform unit testing manually. Or you have to change your method from \""private\"" to \""protected\"".
+
+Or if it is not possible to convert any of the above ways, you can test private method by using PowerMock partialMock.',1);
+insert into Answers values(602,602,'Ans. As a method is declared as \"protected\", it can only be accessed within the same package where the class is defined. To test a \"protected\" method of a target class, you need to define your test class in the same package as the target class.',1);
+insert into Answers values(603,603,'Ans. There are four ways to create a JUnit test suite class in Eclipse with JUnit plugin: org.junit_3.8.1. First, select the directory (usually unit-tests) that you wish to create the test suite class in.
+
+1. Select File > New > Other... > Java > JUnit > JUnit Test Suite.
+2. Select the arrow of the button in the upper left of the toolbar. Select Other... > Java > JUnit > JUnit Test Suite,
+3. Right click on a package in the Package Explorer view in the Java Perspective, and select Other... > Java > JUnit > JUnit Test Suite,
+4. You can create a normal Java class as shown in the Eclipse tutorial, but include junit.framework.TestSuite as the super class of the test class you are creating.',1);
+insert into Answers values(604,604,'Ans. 1. Select File ; New ; JUnit Test Case.
+2. Select the arrow of the button in the upper left of the toolbar. Select JUnit Test Case.
+3. Right click on a package in the Package Explorer view in the Java Perspective, and select JUnitTestCase.
+4. Click on the arrow of the icon in the toolbar. Select JUnit Test Case.
+5. You can create a normal Java class as shown in the Eclipse tutorial, but include junit.framework.TestCase as the super class of the test class you are creating.',1);
+insert into Answers values(605,605,'Ans. You should run all your unit tests as often as possible, ideally every time the code is changed. Make sure all your unit tests always run at 100%. Frequent testing gives you confidence that your changes didn\''t break anything and generally lowers the stress of programming in the dark.
+
+For larger systems, you may just run specific test suites that are relevant to the code you\''re working on. Run all your acceptance, integration, stress, and unit tests at least once per day.',1);
+insert into Answers values(606,606,'Ans. No, just test everything that could reasonably break. Keep in mind NullPointerException which occurs maximum.
+
+Be practical and maximize your testing investment. Remember that investments in testing are equal investments in design. If defects aren\''t being reported and your design responds well to change, then you\''re probably testing enough. If you\''re spending a lot of time fixing defects and your design is difficult to grow, you should write more tests.
+
+If something is difficult to test, it\''s usually an opportunity for a design improvement. Look to improve the design so that it\''s easier to test, and by doing so a better design will usually emerge.',1);
+insert into Answers values(607,607,'Ans. You need to follow the below logics:
+
+* If a method is not returning anything through the \""return\"" statement (void method), it may return data through its arguments. In this case, you can test the data returned in any argument.
+* Else if a method is not returning any data through its arguments, it may change values of its instance variables. In this case, you can test changes of any instance variables.
+* Else if a method is not changing any instance variable, it may change values of its class variables. In this case, you can test changes of any class variables.
+* Else if a method is not changing any class variable, it may change external resources. In this case, you can test changes of any external resources.
+* Else if a method is not changing any external resources, it may just doing nothing but holding the thread in a waiting status. In this case, you can test this waiting condition.
+* Else if a method is not holding the thread in waiting status, then this method is really doing nothing. In this case, there is no need to test this method!',1);
+insert into Answers values(608,608,'Ans. You should write unit test before writing the code if you are a TDD (Test-Driven Development) believer. Test-first programming is practiced by only writing new code when an automated test is failing.
+
+Good tests tell you how to best design the system for its intended use. They effectively communicate in an executable format how to use the software. They also prevent tendencies to over-build the system based on speculation. When all the tests pass, you know you\''re done!
+
+Whenever a customer test fails or a bug is reported, first write the necessary unit test(s) to expose the bug(s), then fix them. This makes it almost impossible for that particular bug to resurface later. Test-driven development is gaining momentum these days compared to writing tests after the code.',1);
